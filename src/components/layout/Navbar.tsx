@@ -4,18 +4,18 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { ShoppingBag, Search, Menu, X, ChevronDown, Scissors, User } from "lucide-react";
+import { ShoppingBag, Search, Menu, X, ChevronDown, Scissors, User, ChevronRight, ArrowUpRight } from "lucide-react";
 import { useCart } from "@/components/cart/CartContext";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useTheme } from "@/components/theme/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 
-const LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
-const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902-removebg-preview.png";
+const LOGO_DARK    = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
+const LOGO_LIGHT   = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902-removebg-preview.png";
+const LOGO_PNG     = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902-removebg-preview.png";
 
 interface NavbarProps {
-  /** When true the navbar floats over the hero (homepage). Becomes solid on scroll. */
   overlay?: boolean;
 }
 
@@ -25,6 +25,8 @@ export function Navbar({ overlay = false }: NavbarProps) {
   const [menOpen, setMenOpen]               = useState(false);
   const [ladyOpen, setLadyOpen]             = useState(false);
   const [accountOpen, setAccountOpen]       = useState(false);
+  const [drawerMenOpen, setDrawerMenOpen]   = useState(false);
+  const [drawerLadyOpen, setDrawerLadyOpen] = useState(false);
   const accountRef                          = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
@@ -51,20 +53,36 @@ export function Navbar({ overlay = false }: NavbarProps) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileMenuOpen]);
+
   async function handleSignOut() {
     setAccountOpen(false);
+    setMobileMenuOpen(false);
     await logout();
     router.push("/");
   }
 
-  const logoSrc   = theme === "dark" ? LOGO_DARK : LOGO_LIGHT;
-  const textColor = isTransparent ? "text-white" : "text-[#050505] dark:text-[#D0D0D0]";
-  const goldHover = "hover:text-[#C6A15B]";
+  function closeDrawer() {
+    setMobileMenuOpen(false);
+    setDrawerMenOpen(false);
+    setDrawerLadyOpen(false);
+  }
+
+  const logoSrc     = theme === "dark" ? LOGO_DARK : LOGO_LIGHT;
+  const textColor   = isTransparent ? "text-white" : "text-[#050505] dark:text-[#D0D0D0]";
+  const goldHover   = "hover:text-[#C6A15B]";
 
   return (
     <>
-      
-      {/* Main header */}
+      {/* ── Main header ── */}
       <header
         className={`${overlay ? "absolute left-0 right-0 z-50" : "sticky top-0 z-50"} transition-all duration-300 ${
           isTransparent
@@ -79,7 +97,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
             <div className="relative h-10 w-28 sm:h-12 sm:w-36">
               <Image
                 key={`${logoSrc}-${isTransparent}`}
-                src={isTransparent ? "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902-removebg-preview.png" : logoSrc}
+                src={isTransparent ? LOGO_PNG : logoSrc}
                 alt="THE FORGE"
                 fill
                 priority
@@ -145,7 +163,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
               <div className="relative" ref={accountRef}>
                 <button
                   onClick={() => setAccountOpen((v) => !v)}
-                  className={`flex items-center justify-center w-7 h-7 border border-[#C6A15B] text-[#C6A15B] text-[10px] font-bold font-sans hover:bg-[#C6A15B] hover:text-white transition-all`}
+                  className="flex items-center justify-center w-7 h-7 border border-[#C6A15B] text-[#C6A15B] text-[10px] font-bold font-sans hover:bg-[#C6A15B] hover:text-white transition-all"
                   aria-label="Account menu"
                 >
                   {user.firstName.charAt(0).toUpperCase()}
@@ -172,68 +190,179 @@ export function Navbar({ overlay = false }: NavbarProps) {
           </nav>
 
           {/* Mobile icons */}
-          <div className="lg:hidden flex items-center gap-3 ml-auto">
-            <ThemeToggle />
+          <div className="lg:hidden flex items-center gap-4 ml-auto">
             <button onClick={openCart} className={`relative p-1 ${textColor}`} aria-label="Bag">
               <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#C6A15B] text-white text-[9px] font-bold rounded-full flex items-center justify-center">{cartCount}</span>
               )}
             </button>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`p-1 ${textColor}`} aria-label="Menu">
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className={`p-1 ${textColor}`}
+              aria-label="Open menu"
+            >
+              <Menu className="w-5 h-5" />
             </button>
           </div>
 
         </Container>
       </header>
 
-      {/* Mobile drawer */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-white dark:bg-[#050505] z-[60] lg:hidden flex flex-col overflow-y-auto">
-          <div className="flex items-center justify-between px-6 py-5 border-b border-[#EBEBEB] dark:border-[#181818]">
-            <div className="relative h-10 w-28">
-              <Image src={logoSrc} alt="THE FORGE" fill className="object-contain object-left" />
-            </div>
-            <button onClick={() => setMobileMenuOpen(false)} className="text-[#050505] dark:text-white p-1">
-              <X className="w-5 h-5" />
-            </button>
+      {/* ── Mobile drawer overlay ── */}
+      {/* Backdrop */}
+      <div
+        onClick={closeDrawer}
+        className={`fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm lg:hidden transition-opacity duration-300 ${mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        aria-hidden="true"
+      />
+
+      {/* Drawer panel -- slides from right */}
+      <div
+        className={`fixed top-0 right-0 h-full w-[85vw] max-w-[360px] z-[80] lg:hidden flex flex-col bg-white dark:bg-[#050505] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+      >
+        {/* Drawer header */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[#EBEBEB] dark:border-[#181818] flex-shrink-0">
+          <div className="relative h-9 w-24">
+            <Image src={logoSrc} alt="THE FORGE" fill className="object-contain object-left" />
           </div>
-          <div className="flex-1 p-6 space-y-6 text-xs tracking-[0.2em] uppercase font-sans">
+          <button
+            onClick={closeDrawer}
+            className="w-8 h-8 flex items-center justify-center text-[#888888] dark:text-[#555555] hover:text-[#050505] dark:hover:text-white transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Drawer body */}
+        <div className="flex-1 overflow-y-auto">
+
+          {/* Main links */}
+          <div className="px-6 pt-6 space-y-1">
+
+            {/* Men Forge accordion */}
             <div>
-              <p className="text-[#C6A15B] text-[9px] font-semibold mb-3 border-b border-[#EBEBEB] dark:border-[#181818] pb-2 tracking-[0.3em]">The Men Forge</p>
-              <div className="pl-3 space-y-3 text-[#555555] dark:text-[#888888]">
-                <Link href="/the-men-forge" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-white">All Collections</Link>
-                <Link href="/the-men-forge/suits-blazers" onClick={() => setMobileMenuOpen(false)} className="block">Suits and Tuxedos</Link>
-                <Link href="/the-men-forge/jalamia-kaftans" onClick={() => setMobileMenuOpen(false)} className="block text-[#C6A15B]">Jalamias and Kaftans</Link>
-                <Link href="/the-men-forge/luxury-coats" onClick={() => setMobileMenuOpen(false)} className="block">Luxury Coats</Link>
-              </div>
-            </div>
-            <div>
-              <p className="text-[#C6A15B] text-[9px] font-semibold mb-3 border-b border-[#EBEBEB] dark:border-[#181818] pb-2 tracking-[0.3em]">The Lady Forge</p>
-              <div className="pl-3 space-y-3 text-[#555555] dark:text-[#888888]">
-                <Link href="/the-lady-forge" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-white">All Collections</Link>
-                <Link href="/the-lady-forge/wedding-dresses" onClick={() => setMobileMenuOpen(false)} className="block text-[#C6A15B]">Wedding and Bridal</Link>
-                <Link href="/the-lady-forge/couture-gowns" onClick={() => setMobileMenuOpen(false)} className="block">Couture Gowns</Link>
-                <Link href="/the-lady-forge/tailored-suits" onClick={() => setMobileMenuOpen(false)} className="block">Tailored Suits</Link>
-              </div>
-            </div>
-            <div className="pt-2 border-t border-[#EBEBEB] dark:border-[#181818] space-y-3">
-              <Link href="/custom-dressing" onClick={() => setMobileMenuOpen(false)} className="block text-[#C6A15B] flex items-center gap-2"><Scissors className="w-3.5 h-3.5" /> Book Bespoke</Link>
-              <Link href="/editorial" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">Lookbook</Link>
-              <Link href="/search" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">Search</Link>
-              {isAuthenticated ? (
-                <>
-                  <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">My Account</Link>
-                  <button onClick={async () => { setMobileMenuOpen(false); await handleSignOut(); }} className="block w-full text-left text-[#888888] dark:text-[#555555] uppercase tracking-[0.2em] text-xs font-sans">Sign Out</button>
-                </>
-              ) : (
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">Sign In</Link>
+              <button
+                onClick={() => setDrawerMenOpen((v) => !v)}
+                className="w-full flex items-center justify-between py-3.5 border-b border-[#F0F0F0] dark:border-[#141414]"
+              >
+                <span className="font-editorial text-xl text-[#050505] dark:text-white font-light tracking-wide">The Men Forge</span>
+                <ChevronRight className={`w-4 h-4 text-[#C6A15B] transition-transform duration-200 ${drawerMenOpen ? "rotate-90" : ""}`} />
+              </button>
+              {drawerMenOpen && (
+                <div className="py-2 pl-4 space-y-1">
+                  {[
+                    { href: "/the-men-forge", label: "All Collections" },
+                    { href: "/the-men-forge/suits-blazers", label: "Suits and Tuxedos" },
+                    { href: "/the-men-forge/jalamia-kaftans", label: "Jalamias and Kaftans" },
+                    { href: "/the-men-forge/luxury-coats", label: "Luxury Coats" },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeDrawer}
+                      className="flex items-center justify-between py-2.5 text-[11px] uppercase tracking-[0.2em] text-[#555555] dark:text-[#888888] hover:text-[#C6A15B] transition-colors font-sans"
+                    >
+                      {item.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-40" />
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
+
+            {/* Lady Forge accordion */}
+            <div>
+              <button
+                onClick={() => setDrawerLadyOpen((v) => !v)}
+                className="w-full flex items-center justify-between py-3.5 border-b border-[#F0F0F0] dark:border-[#141414]"
+              >
+                <span className="font-editorial text-xl text-[#050505] dark:text-white font-light tracking-wide">The Lady Forge</span>
+                <ChevronRight className={`w-4 h-4 text-[#C6A15B] transition-transform duration-200 ${drawerLadyOpen ? "rotate-90" : ""}`} />
+              </button>
+              {drawerLadyOpen && (
+                <div className="py-2 pl-4 space-y-1">
+                  {[
+                    { href: "/the-lady-forge", label: "All Collections" },
+                    { href: "/the-lady-forge/wedding-dresses", label: "Wedding and Bridal" },
+                    { href: "/the-lady-forge/couture-gowns", label: "Couture Gala Gowns" },
+                    { href: "/the-lady-forge/tailored-suits", label: "Tailored Suits" },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeDrawer}
+                      className="flex items-center justify-between py-2.5 text-[11px] uppercase tracking-[0.2em] text-[#555555] dark:text-[#888888] hover:text-[#C6A15B] transition-colors font-sans"
+                    >
+                      {item.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-40" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Standalone links */}
+            {[
+              { href: "/custom-dressing", label: "Bespoke Fitting", accent: true },
+              { href: "/editorial", label: "Lookbook", accent: false },
+              { href: "/search", label: "Search", accent: false },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeDrawer}
+                className={`flex items-center justify-between py-3.5 border-b border-[#F0F0F0] dark:border-[#141414] text-[11px] uppercase tracking-[0.2em] font-sans transition-colors ${item.accent ? "text-[#C6A15B]" : "text-[#050505] dark:text-[#D0D0D0] hover:text-[#C6A15B]"}`}
+              >
+                <span className="font-editorial text-xl font-light tracking-wide">{item.label}</span>
+                <ArrowUpRight className="w-3.5 h-3.5 opacity-40" />
+              </Link>
+            ))}
+          </div>
+
+          {/* Account section */}
+          <div className="px-6 pt-6 pb-4 mt-2 border-t border-[#EBEBEB] dark:border-[#181818]">
+            <p className="text-[9px] uppercase tracking-[0.35em] text-[#AAAAAA] dark:text-[#444444] font-sans mb-4">Account</p>
+            {isAuthenticated && user ? (
+              <div className="space-y-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 border border-[#C6A15B] flex items-center justify-center text-[#C6A15B] text-xs font-bold font-sans">
+                    {user.firstName.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#050505] dark:text-white font-sans font-medium">{user.firstName} {user.lastName}</p>
+                    <p className="text-[10px] text-[#888888] dark:text-[#555555] font-sans">{user.email}</p>
+                  </div>
+                </div>
+                <Link href="/account" onClick={closeDrawer} className="flex items-center justify-between py-3 text-[11px] uppercase tracking-[0.2em] text-[#050505] dark:text-[#D0D0D0] hover:text-[#C6A15B] font-sans transition-colors border-b border-[#F0F0F0] dark:border-[#141414]">
+                  My Account <ChevronRight className="w-3.5 h-3.5 opacity-40" />
+                </Link>
+                <button onClick={handleSignOut} className="w-full flex items-center justify-between py-3 text-[11px] uppercase tracking-[0.2em] text-[#888888] dark:text-[#555555] hover:text-[#050505] dark:hover:text-white font-sans transition-colors">
+                  Sign Out <ChevronRight className="w-3.5 h-3.5 opacity-40" />
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <Link href="/login" onClick={closeDrawer} className="flex items-center justify-between py-3 text-[11px] uppercase tracking-[0.2em] text-[#050505] dark:text-[#D0D0D0] hover:text-[#C6A15B] font-sans transition-colors border-b border-[#F0F0F0] dark:border-[#141414]">
+                  Sign In <ChevronRight className="w-3.5 h-3.5 opacity-40" />
+                </Link>
+                <Link href="/register" onClick={closeDrawer} className="flex items-center justify-between py-3 text-[11px] uppercase tracking-[0.2em] text-[#C6A15B] font-sans transition-colors">
+                  Create Account <ChevronRight className="w-3.5 h-3.5 opacity-40" />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
-      )}
+
+        {/* Drawer footer */}
+        <div className="px-6 py-5 border-t border-[#EBEBEB] dark:border-[#181818] flex-shrink-0 flex items-center justify-between">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#CCCCCC] dark:text-[#333333] font-sans">
+            The Forge - Haute Couture
+          </p>
+          <ThemeToggle />
+        </div>
+      </div>
     </>
   );
 }
