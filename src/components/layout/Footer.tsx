@@ -157,16 +157,19 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-4">
             <Link href="/privacy" className="hover:text-[#050505] dark:hover:text-[#8E8E93] transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-[#050505] dark:hover:text-[#8E8E93] transition-colors">Terms of Service</Link>
-            <span className="w-px h-3 bg-[#E5E5E5] dark:bg-[#262626]" />
-            <a
-              href="https://www.akinlajatimileyin.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#888888] dark:text-[#444444] hover:text-[#C6A15B] dark:hover:text-[#C6A15B] transition-colors"
-            >
-              Designed and developed by Akinlaja
-            </a>
           </div>
+        </div>
+
+        {/* Designer credit -- centred */}
+        <div className="pt-5 text-center">
+          <a
+            href="https://www.akinlajatimileyin.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[9px] uppercase tracking-[0.3em] text-[#CCCCCC] dark:text-[#333333] hover:text-[#C6A15B] dark:hover:text-[#C6A15B] transition-colors font-sans"
+          >
+            Designed and Developed by Akinlaja
+          </a>
         </div>
 
       </Container>

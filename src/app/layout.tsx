@@ -23,11 +23,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "THE FORGE — Haute Couture & Handmade Custom Dressing",
+    default: "THE FORGE — Dare it, Wear it!",
     template: "%s | THE FORGE",
   },
   description:
-    "International luxury fashion house crafting handmade custom dressing, bespoke suits, couture gowns, bridal wear, and Jalamias for Men and Women.",
+    "Premium Nigerian fashion brand. Menswear and womenswear crafted with intention — from Lagos to the world. Dare it, Wear it!",
 
   // Favicon
   icons: {
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
 
   // Open Graph — controls how the link looks on WhatsApp, Facebook, etc.
   openGraph: {
-    title: "THE FORGE — Haute Couture & Handmade Custom Dressing",
+    title: "THE FORGE — Dare it, Wear it!",
     description:
-      "Bespoke fashion crafted with precision. Explore The Men Forge and The Lady Forge.",
+      "Premium Nigerian fashion. Vintage shirts, streetwear, jalabias, corporate dresses, dinner gowns and more. Dare it, Wear it!",
     url: SITE_URL,
     siteName: "THE FORGE",
     locale: "en_US",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
         url: LOGO_URL,
         width: 1200,
         height: 630,
-        alt: "THE FORGE — Haute Couture",
+        alt: "THE FORGE — Dare it, Wear it!",
       },
     ],
   },
@@ -62,8 +62,8 @@ export const metadata: Metadata = {
   // Twitter / X card
   twitter: {
     card: "summary_large_image",
-    title: "THE FORGE — Haute Couture & Handmade Custom Dressing",
-    description: "Bespoke fashion crafted with precision for Men and Women.",
+    title: "THE FORGE — Dare it, Wear it!",
+    description: "Premium Nigerian fashion for Men and Women. Dare it, Wear it!",
     images: [LOGO_URL],
   },
 
