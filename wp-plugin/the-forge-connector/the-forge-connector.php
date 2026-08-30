@@ -19,13 +19,22 @@ define( 'TFC_VERSION',    '1.0.0' );
 define( 'TFC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TFC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
-add_action( 'plugins_loaded', function () {
-    if ( ! class_exists( 'WooCommerce' ) ) {
+/**
+ * Boot on woocommerce_loaded so WC is guaranteed available.
+ * Falls back to plugins_loaded priority 20 as a safety net.
+ */
+function tfc_boot() {
+    static $booted = false;
+    if ( $booted ) return;
+
+    if ( ! function_exists( 'WC' ) && ! class_exists( 'WooCommerce' ) ) {
         add_action( 'admin_notices', function () {
             echo '<div class="notice notice-error"><p><strong>The Forge Connector</strong> requires WooCommerce to be installed and active.</p></div>';
         } );
         return;
     }
+
+    $booted = true;
 
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-cors.php';
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-products.php';
@@ -38,4 +47,10 @@ add_action( 'plugins_loaded', function () {
     TFC_Auth::init();
     TFC_Cart::init();
     TFC_Users::init();
-} );
+}
+
+// Primary hook -- fires after WooCommerce fully loads
+add_action( 'woocommerce_loaded', 'tfc_boot' );
+
+// Fallback -- catches cases where woocommerce_loaded already fired
+add_action( 'plugins_loaded', 'tfc_boot', 20 );
