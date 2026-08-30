@@ -7,25 +7,25 @@ import { useTheme } from "@/components/theme/ThemeContext";
 import { ArrowRight } from "lucide-react";
 
 /*
-  Video sources -- use a publicly hosted fashion/editorial video.
-  Two fallback sources for broad browser support (webm + mp4).
-  The poster image shows while the video loads.
+  Video served via ImageKit CDN.
+  ImageKit auto-transcodes and serves from edge nodes globally.
+  tr=f-mp4 forces MP4/H.264 output for universal browser support.
+  q-60 compresses to ~60% quality -- good balance of size vs clarity.
+  The poster is a still frame shown while video loads.
 */
-const VIDEO_WEBM = "https://cdn.mixkit.co/videos/preview/mixkit-tailor-measuring-a-suit-34560-large.webm";
-const VIDEO_MP4  = "https://cdn.mixkit.co/videos/preview/mixkit-tailor-measuring-a-suit-34560-large.mp4";
-const VIDEO_POSTER = "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=2000&q=80";
+const VIDEO_SRC    = "https://ik.imagekit.io/scmchurch/IMG_9019.MOV/ik-video.mp4";
+const VIDEO_POSTER = "https://ik.imagekit.io/scmchurch/IMG_9019.MOV/ik-thumbnail.jpg?tr=w-1920,q-80";
 
 export function CinematicHero() {
-  const { theme } = useTheme();
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const { theme }  = useTheme();
+  const videoRef   = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.85;
+      videoRef.current.playbackRate = 0.9;
     }
   }, []);
 
-  /* overlay differs by theme */
   const overlayClass = theme === "dark"
     ? "bg-gradient-to-r from-[#050505]/90 via-[#050505]/55 to-[#050505]/20"
     : "bg-gradient-to-r from-white/85 via-white/55 to-white/10";
@@ -34,38 +34,36 @@ export function CinematicHero() {
     ? "bg-gradient-to-t from-[#050505] via-transparent to-transparent"
     : "bg-gradient-to-t from-white/70 via-transparent to-transparent";
 
-  const headlineColor  = theme === "dark" ? "text-white"        : "text-[#050505]";
-  const subTextColor   = theme === "dark" ? "text-[#B0B0B0]"    : "text-[#444444]";
-  const statNumColor   = theme === "dark" ? "text-white"        : "text-[#050505]";
-  const statLabelColor = theme === "dark" ? "text-[#8E8E93]"    : "text-[#888888]";
-  const dividerColor   = theme === "dark" ? "bg-white/10"       : "bg-[#050505]/15";
-  const statBorderColor = theme === "dark" ? "border-white/10"  : "border-[#050505]/10";
+  const headlineColor   = theme === "dark" ? "text-white"         : "text-[#050505]";
+  const subTextColor    = theme === "dark" ? "text-[#B0B0B0]"     : "text-[#444444]";
+  const statNumColor    = theme === "dark" ? "text-white"         : "text-[#050505]";
+  const statLabelColor  = theme === "dark" ? "text-[#8E8E93]"     : "text-[#888888]";
+  const dividerColor    = theme === "dark" ? "bg-white/10"        : "bg-[#050505]/15";
+  const statBorderColor = theme === "dark" ? "border-white/10"    : "border-[#050505]/10";
 
   return (
     <section className="relative w-full h-[94vh] min-h-[640px] overflow-hidden flex items-end">
 
-      {/* Video layer */}
+      {/* Video */}
       <video
         ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
+        preload="metadata"
         poster={VIDEO_POSTER}
         className="absolute inset-0 w-full h-full object-cover object-center"
         aria-hidden="true"
       >
-        <source src={VIDEO_WEBM} type="video/webm" />
-        <source src={VIDEO_MP4}  type="video/mp4"  />
+        <source src={VIDEO_SRC} type="video/mp4" />
       </video>
 
-      {/* Directional overlay -- left-to-right fade */}
+      {/* Overlays */}
       <div className={`absolute inset-0 ${overlayClass}`} />
-
-      {/* Bottom vignette so text never bleeds */}
       <div className={`absolute inset-0 ${bottomGradient}`} />
 
-      {/* Content -- bottom-left editorial layout */}
+      {/* Content */}
       <div className="relative z-10 w-full px-8 sm:px-16 pb-16 sm:pb-24">
         <div className="max-w-2xl space-y-6">
 
@@ -111,11 +109,11 @@ export function CinematicHero() {
             </Link>
           </div>
 
-          {/* Stats bar */}
+          {/* Stats */}
           <div className={`flex items-center gap-7 pt-5 border-t ${statBorderColor}`}>
             {[
-              { value: "18+", label: "Years" },
-              { value: "4",   label: "Ateliers" },
+              { value: "18+",  label: "Years"    },
+              { value: "4",    label: "Ateliers" },
               { value: "100%", label: "Handmade" },
             ].map((s, i) => (
               <React.Fragment key={s.label}>

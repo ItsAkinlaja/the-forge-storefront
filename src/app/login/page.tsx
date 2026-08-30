@@ -16,7 +16,7 @@ const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/0
 export default function LoginPage() {
   const { login } = useAuth();
   const { theme } = useTheme();
-  const router = useRouter();
+  const router    = useRouter();
 
   const [email, setEmail]               = useState("");
   const [password, setPassword]         = useState("");
@@ -43,37 +43,42 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] flex flex-col lg:flex-row">
 
-      {/* â”€â”€ LEFT: image panel (desktop only) â”€â”€ */}
+      {/* LEFT: editorial image panel, desktop only */}
       <div className="hidden lg:block relative w-[45%] xl:w-1/2 min-h-screen flex-shrink-0">
         <Image
           src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1400&q=90"
           alt="The Forge Atelier"
           fill
           priority
-          className="object-cover object-center brightness-[0.55]"
+          className="object-cover object-center brightness-[0.45]"
         />
-        {/* overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/70 via-[#050505]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 via-transparent to-transparent" />
 
-        {/* bottom-left brand copy */}
-        <div className="absolute bottom-0 left-0 p-12 space-y-3">
+        <div className="absolute bottom-0 left-0 p-12 space-y-4">
           <p className="text-[9px] uppercase tracking-[0.45em] text-[#C6A15B] font-sans">
             Atelier Account
           </p>
-          <p className="font-editorial text-4xl xl:text-5xl text-white font-light leading-tight">
+          <p className="font-editorial text-4xl xl:text-5xl text-white font-light leading-[1.1]">
             Crafted for those<br />who demand only<br />
             <span className="italic">the finest.</span>
           </p>
         </div>
       </div>
 
-      {/* â”€â”€ RIGHT: form panel â”€â”€ */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      {/* RIGHT: form panel */}
+      <div className="flex-1 flex flex-col min-h-screen bg-white dark:bg-[#050505]">
 
         {/* top bar */}
-        <div className="flex items-center justify-between px-6 sm:px-10 py-6 border-b border-[#EBEBEB] dark:border-[#181818]">
-          <Link href="/" className="relative h-10 w-28 block">
-            <Image src={logoSrc} alt="THE FORGE" fill className="object-contain object-left" />
+        <div className="flex items-center justify-between px-6 sm:px-10 py-5 border-b border-[#EBEBEB] dark:border-[#181818]">
+          <Link href="/" className="relative h-10 w-28 block flex-shrink-0">
+            <Image
+              src={logoSrc}
+              alt="THE FORGE"
+              fill
+              priority
+              className="object-contain object-left"
+            />
           </Link>
           <Link
             href="/"
@@ -85,10 +90,9 @@ export default function LoginPage() {
         </div>
 
         {/* centred form */}
-        <div className="flex-1 flex items-center justify-center px-6 sm:px-10 py-12">
-          <div className="w-full max-w-[400px] space-y-8">
+        <div className="flex-1 flex items-center justify-center px-6 sm:px-10 py-16">
+          <div className="w-full max-w-[380px] space-y-8">
 
-            {/* heading */}
             <div className="space-y-2">
               <p className="text-[9px] uppercase tracking-[0.45em] text-[#C6A15B] font-sans">
                 Sign In
@@ -101,7 +105,6 @@ export default function LoginPage() {
               </p>
             </div>
 
-            {/* form */}
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <Input
                 id="email"
@@ -136,7 +139,7 @@ export default function LoginPage() {
               </div>
 
               {error && (
-                <p className="text-[11px] text-red-500 font-sans px-0 py-2 border-l-2 border-red-500 pl-3">
+                <p className="text-[11px] text-red-500 font-sans border-l-2 border-red-500 pl-3 py-1">
                   {error}
                 </p>
               )}
@@ -144,20 +147,19 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 variant="gold"
-                className="w-full py-4 mt-1"
+                className="w-full py-4"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Signing in..." : "Sign In"}
               </Button>
             </form>
 
-            {/* footer links */}
-            <div className="pt-6 border-t border-[#EBEBEB] dark:border-[#181818] space-y-3">
-              <p className="text-[11px] text-[#888888] dark:text-[#555555] font-sans">
+            <div className="pt-2 border-t border-[#EBEBEB] dark:border-[#181818]">
+              <p className="text-[11px] text-[#888888] dark:text-[#555555] font-sans pt-4">
                 New to The Forge?{" "}
                 <Link
                   href="/register"
-                  className="text-[#050505] dark:text-white hover:text-[#C6A15B] dark:hover:text-[#C6A15B] transition-colors underline underline-offset-2"
+                  className="text-[#050505] dark:text-white hover:text-[#C6A15B] transition-colors underline underline-offset-2"
                 >
                   Create an account
                 </Link>
@@ -168,9 +170,9 @@ export default function LoginPage() {
         </div>
 
         {/* bottom bar */}
-        <div className="px-6 sm:px-10 py-5 border-t border-[#EBEBEB] dark:border-[#181818]">
-          <p className="text-[9px] uppercase tracking-[0.3em] text-[#BBBBBB] dark:text-[#333333] font-sans">
-            The Forge â€” Haute Couture and Handmade Custom Dressing
+        <div className="px-6 sm:px-10 py-4 border-t border-[#EBEBEB] dark:border-[#181818]">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#CCCCCC] dark:text-[#333333] font-sans">
+            The Forge - Haute Couture and Handmade Custom Dressing
           </p>
         </div>
 
