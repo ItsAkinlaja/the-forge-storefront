@@ -2,21 +2,29 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { useTheme } from "@/components/theme/ThemeContext";
+
+const LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
+const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788079650893.jpeg";
 
 export default function LoginPage() {
   const { login } = useAuth();
+  const { theme } = useTheme();
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail]               = useState("");
+  const [password, setPassword]         = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError]               = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const logoSrc = theme === "dark" ? LOGO_DARK : LOGO_LIGHT;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -26,124 +34,146 @@ export default function LoginPage() {
       await login(email, password);
       router.push("/account");
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Sign in failed. Please check your credentials.");
+      setError(err instanceof Error ? err.message : "Incorrect email or password.");
     } finally {
       setIsSubmitting(false);
     }
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#050505] text-[#050505] dark:text-white flex">
-      {/* Left — editorial */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 px-16 py-20 border-r border-[#EBEBEB] dark:border-[#181818]">
-        <div>
-          <Link href="/" className="text-[10px] tracking-[0.35em] uppercase text-[#C6A15B] font-sans">
-            The Forge
-          </Link>
-        </div>
-        <div className="max-w-md">
-          <p className="text-[11px] tracking-[0.3em] uppercase text-[#C6A15B] font-sans mb-6">
+    <div className="min-h-screen bg-white dark:bg-[#050505] flex flex-col lg:flex-row">
+
+      {/* ── LEFT: image panel (desktop only) ── */}
+      <div className="hidden lg:block relative w-[45%] xl:w-1/2 min-h-screen flex-shrink-0">
+        <Image
+          src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1400&q=90"
+          alt="The Forge Atelier"
+          fill
+          priority
+          className="object-cover object-center brightness-[0.55]"
+        />
+        {/* overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/60 via-transparent to-transparent" />
+
+        {/* bottom-left brand copy */}
+        <div className="absolute bottom-0 left-0 p-12 space-y-3">
+          <p className="text-[9px] uppercase tracking-[0.45em] text-[#C6A15B] font-sans">
             Atelier Account
           </p>
-          <h1 className="font-editorial text-6xl xl:text-7xl text-[#050505] dark:text-white leading-[1.05] font-light mb-8">
-            Welcome<br />Back.
-          </h1>
-          <p className="text-sm text-[#555555] dark:text-[#888888] leading-relaxed font-sans max-w-sm">
-            Sign in to your Forge account to access your selections, bespoke orders, and atelier history.
-          </p>
-        </div>
-        <div>
-          <p className="text-[10px] tracking-[0.25em] uppercase text-[#BBBBBB] dark:text-[#444444] font-sans">
-            Handcrafted with precision since 2020
+          <p className="font-editorial text-4xl xl:text-5xl text-white font-light leading-tight">
+            Crafted for those<br />who demand only<br />
+            <span className="italic">the finest.</span>
           </p>
         </div>
       </div>
 
-      {/* Right — form */}
-      <div className="flex-1 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-28 py-16">
-        {/* Mobile header */}
-        <div className="lg:hidden mb-10">
-          <Link href="/" className="text-[10px] tracking-[0.35em] uppercase text-[#C6A15B] font-sans block mb-6">
-            The Forge
+      {/* ── RIGHT: form panel ── */}
+      <div className="flex-1 flex flex-col min-h-screen">
+
+        {/* top bar */}
+        <div className="flex items-center justify-between px-6 sm:px-10 py-6 border-b border-[#EBEBEB] dark:border-[#181818]">
+          <Link href="/" className="relative h-10 w-28 block">
+            <Image src={logoSrc} alt="THE FORGE" fill className="object-contain object-left" />
           </Link>
-          <h1 className="font-editorial text-4xl text-[#050505] dark:text-white font-light mb-3">
-            Welcome Back.
-          </h1>
-          <p className="text-sm text-[#555555] dark:text-[#888888] font-sans">
-            Sign in to your Forge account.
-          </p>
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.25em] text-[#888888] dark:text-[#555555] hover:text-[#050505] dark:hover:text-white transition-colors font-sans"
+          >
+            <ArrowLeft className="w-3 h-3" />
+            Back to store
+          </Link>
         </div>
 
-        <div className="max-w-sm w-full mx-auto lg:mx-0">
-          <p className="hidden lg:block text-[10px] tracking-[0.3em] uppercase text-[#888888] dark:text-[#555555] font-sans mb-10">
-            Sign in to continue
-          </p>
+        {/* centred form */}
+        <div className="flex-1 flex items-center justify-center px-6 sm:px-10 py-12">
+          <div className="w-full max-w-[400px] space-y-8">
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-5">
-            <Input
-              id="email"
-              type="email"
-              label="Email Address"
-              placeholder="your@email.com"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-
-            <div className="relative">
-              <Input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                label="Password"
-                placeholder="Your password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword((v) => !v)}
-                className="absolute right-4 bottom-3.5 text-[#888888] dark:text-[#555555] hover:text-[#050505] dark:hover:text-white transition-colors"
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? (
-                  <EyeOff className="w-4 h-4" />
-                ) : (
-                  <Eye className="w-4 h-4" />
-                )}
-              </button>
+            {/* heading */}
+            <div className="space-y-2">
+              <p className="text-[9px] uppercase tracking-[0.45em] text-[#C6A15B] font-sans">
+                Sign In
+              </p>
+              <h1 className="font-editorial text-4xl sm:text-5xl text-[#050505] dark:text-white font-light leading-tight">
+                Welcome back.
+              </h1>
+              <p className="text-xs text-[#888888] dark:text-[#555555] font-sans leading-relaxed">
+                Access your orders, fittings, and bespoke history.
+              </p>
             </div>
 
-            {error && (
-              <p className="text-[12px] text-red-500 font-sans border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/20 px-4 py-3">
-                {error}
-              </p>
-            )}
+            {/* form */}
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
+              <Input
+                id="email"
+                type="email"
+                label="Email Address"
+                placeholder="your@email.com"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
 
-            <Button
-              type="submit"
-              variant="gold"
-              className="w-full py-4 mt-2"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Signing in..." : "Sign In"}
-            </Button>
-          </form>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  label="Password"
+                  placeholder="Your password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute right-4 bottom-[14px] text-[#AAAAAA] dark:text-[#555555] hover:text-[#050505] dark:hover:text-white transition-colors"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
 
-          <div className="mt-8 pt-8 border-t border-[#EBEBEB] dark:border-[#181818]">
-            <p className="text-[11px] text-[#888888] dark:text-[#555555] font-sans tracking-wide">
-              New to The Forge?{" "}
-              <Link
-                href="/register"
-                className="text-[#050505] dark:text-white underline underline-offset-2 hover:text-[#C6A15B] dark:hover:text-[#C6A15B] transition-colors"
+              {error && (
+                <p className="text-[11px] text-red-500 font-sans px-0 py-2 border-l-2 border-red-500 pl-3">
+                  {error}
+                </p>
+              )}
+
+              <Button
+                type="submit"
+                variant="gold"
+                className="w-full py-4 mt-1"
+                disabled={isSubmitting}
               >
-                Create an account
-              </Link>
-            </p>
+                {isSubmitting ? "Signing in..." : "Sign In"}
+              </Button>
+            </form>
+
+            {/* footer links */}
+            <div className="pt-6 border-t border-[#EBEBEB] dark:border-[#181818] space-y-3">
+              <p className="text-[11px] text-[#888888] dark:text-[#555555] font-sans">
+                New to The Forge?{" "}
+                <Link
+                  href="/register"
+                  className="text-[#050505] dark:text-white hover:text-[#C6A15B] dark:hover:text-[#C6A15B] transition-colors underline underline-offset-2"
+                >
+                  Create an account
+                </Link>
+              </p>
+            </div>
+
           </div>
         </div>
+
+        {/* bottom bar */}
+        <div className="px-6 sm:px-10 py-5 border-t border-[#EBEBEB] dark:border-[#181818]">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-[#BBBBBB] dark:text-[#333333] font-sans">
+            The Forge — Haute Couture and Handmade Custom Dressing
+          </p>
+        </div>
+
       </div>
     </div>
   );
