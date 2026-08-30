@@ -12,7 +12,7 @@ import { useTheme } from "@/components/theme/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 
 const LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
-const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902.jpeg";
+const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902-removebg-preview.png";
 
 interface NavbarProps {
   /** When true the navbar floats over the hero (homepage). Becomes solid on scroll. */
@@ -79,7 +79,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
             <div className="relative h-10 w-28 sm:h-12 sm:w-36">
               <Image
                 key={`${logoSrc}-${isTransparent}`}
-                src={isTransparent ? LOGO_DARK : logoSrc}
+                src={isTransparent ? "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902-removebg-preview.png" : logoSrc}
                 alt="THE FORGE"
                 fill
                 priority

@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { useTheme } from "@/components/theme/ThemeContext";
 
 const LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
-const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902.jpeg";
+const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902-removebg-preview.png";
 
 export default function LoginPage() {
   const { login } = useAuth();
