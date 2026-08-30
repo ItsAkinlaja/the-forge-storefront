@@ -63,13 +63,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
   return (
     <>
-      {/* Announcement bar */}
-      <div className={`${overlay ? "relative z-50" : ""} ${isTransparent ? "bg-black/30 border-white/10" : "bg-[#FAFAFA] dark:bg-[#0A0A0A] border-[#EBEBEB] dark:border-[#181818]"} border-b py-1.5 text-center transition-colors duration-300`}>
-        <span className="text-[9px] tracking-[0.35em] text-[#C6A15B]/80 uppercase font-sans">
-          Complimentary worldwide shipping on all bespoke orders
-        </span>
-      </div>
-
+      
       {/* Main header */}
       <header
         className={`${overlay ? "absolute left-0 right-0 z-50" : "sticky top-0 z-50"} transition-all duration-300 ${
