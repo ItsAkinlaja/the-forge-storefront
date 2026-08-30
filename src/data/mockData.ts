@@ -1,296 +1,457 @@
 import { Product, Collection } from "@/types";
 
+// Naira exchange rate -- update as needed
+const NGN = (usd: number) => `N${(usd * 1600).toLocaleString()}`;
+const fmt  = (usd: number) => `N${(usd * 1600).toLocaleString()}`;
+
 export const MOCK_PRODUCTS: Product[] = [
-  // --- THE MEN FORGE ---
+
+  // ── THE MEN FORGE ─────────────────────────────────────────────────────────
+
   {
     id: "men-1",
-    slug: "royal-imperial-velvet-tuxedo",
-    name: "The Royal Imperial Velvet Tuxedo",
-    tagline: "Hand-tailored silk-velvet dinner jacket with satin lapel & Aso-Oke silk inner lining",
-    price: 3450,
-    formattedPrice: "$3,450 / ₦4,830,000",
+    slug: "vintage-oxford-shirt",
+    name: "The Forge Vintage Oxford Shirt",
+    tagline: "Premium long-sleeve Oxford shirt with embroidered Forge logo crest",
+    price: 45000,
+    formattedPrice: fmt(45000),
     mainCategory: "the-men-forge",
-    subcategory: "suits-blazers",
-    subcategoryName: "Suits & Blazers",
+    subcategory: "vintage-shirts",
+    subcategoryName: "Vintage by Forge",
     featured: true,
-    isBespoke: true,
-    description: "Crafted over 120 hours of master tailoring in our Lagos and Paris ateliers, The Royal Imperial Velvet Tuxedo represents the pinnacle of formal mens wear. Featuring a structured shoulder, hand-rolled satin lapel, and silk lining embroidered with signature Nigerian gold filigree.",
+    isBespoke: false,
+    description: "The foundational piece of The Forge menswear identity. Crafted from a heavyweight 120gsm cotton Oxford weave with a subtle grid texture, this long-sleeve shirt carries the signature Forge embroidered crest at the chest pocket. Cut slightly relaxed through the body for effortless versatility from street to boardroom.",
     details: [
-      "100% Italian Silk Velvet with woven metallic accents",
-      "Hand-finished silk satin shawl lapel",
-      "Custom hand-woven Aso-Oke silk lining details",
-      "Full canvas construction for unmatched structure & longevity",
-      "Handmade to your exact bespoke measurements in Lagos or Paris"
+      "100% heavyweight cotton Oxford weave",
+      "Embroidered Forge crest at chest",
+      "Button-down collar with collar stays",
+      "Single-button barrel cuffs",
+      "Available in regular and slim fit"
     ],
-    fabricCare: [
-      "Dry clean only by luxury garment specialists",
-      "Store on wide wooden suit hanger provided"
-    ],
+    fabricCare: ["Machine wash cold", "Iron on medium heat", "Do not bleach"],
     images: [
-      {
-        id: "img-m1-1",
-        src: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=85",
-        alt: "The Royal Imperial Velvet Tuxedo Front View"
-      },
-      {
-        id: "img-m1-2",
-        src: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1200&q=85",
-        alt: "The Royal Imperial Velvet Tuxedo Detail"
-      },
-      {
-        id: "img-m1-3",
-        src: "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1200&q=85",
-        alt: "Model styling velvet tuxedo"
-      }
+      { id: "img-m1-1", src: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1200&q=85", alt: "Forge Vintage Oxford Shirt front" },
+      { id: "img-m1-2", src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85", alt: "Oxford Shirt detail" }
     ],
-    bespokeOptions: {
-      id: "b-m1",
-      name: "Master Bespoke Tailoring",
-      description: "Submit your exact body measurements for a custom cut pattern created by our lead master tailor.",
-      measurementFields: ["Chest", "Waist", "Hips", "Shoulder Width", "Sleeve Length", "Jacket Length"],
-      availableFabrics: [
-        { id: "fab-1", name: "Midnight Obsidian Velvet", colorHex: "#08080A" },
-        { id: "fab-2", name: "Deep Royal Navy Velvet", colorHex: "#0B1325" },
-        { id: "fab-3", name: "Imperial Gold Brocade Velvet", colorHex: "#382D12" }
-      ]
-    },
-    sizes: ["Bespoke Custom Fit", "48 EU", "50 EU", "52 EU", "54 EU"],
-    inStock: true
-  },
-  {
-    id: "men-2",
-    slug: "sovereign-embroidered-silk-jalamia",
-    name: "The Sovereign Gold-Embroidered Silk Jalamia",
-    tagline: "Handmade Nigerian luxury kaftan & Jalamia with intricate 24K gold thread embroidery",
-    price: 2850,
-    formattedPrice: "$2,850 / ₦3,990,000",
-    mainCategory: "the-men-forge",
-    subcategory: "jalamia-kaftans",
-    subcategoryName: "Jalamia & Kaftans",
-    featured: true,
-    isBespoke: true,
-    description: "An homage to regal Nigerian heritage and modern haute couture minimalism. Cut from heavy mulberry silk crepe de chine with hand-worked metallic gold embroidery along the neck collar, bib, and cuffs.",
-    details: [
-      "100% Pure Mulberry Silk Crepe de Chine",
-      "24K Gold-tone metallic thread hand embroidery by master Nigerian artisans",
-      "Concealed hidden placket with mother-of-pearl buttons",
-      "Structured standing band collar",
-      "Tailored side seam pockets for regal comfort"
-    ],
-    fabricCare: [
-      "Specialist dry clean with embroidery protection",
-      "Steam gently inside out"
-    ],
-    images: [
-      {
-        id: "img-m2-1",
-        src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85",
-        alt: "The Sovereign Gold Embroidered Silk Jalamia"
-      },
-      {
-        id: "img-m2-2",
-        src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=85",
-        alt: "Jalamia embroidery close up detail"
-      }
-    ],
-    bespokeOptions: {
-      id: "b-m2",
-      name: "Custom Bespoke Fitting",
-      description: "Provide your chest, arm length, and total garment length to ensure regal drape.",
-      measurementFields: ["Chest", "Shoulder Width", "Arm Length", "Garment Length"],
-      availableFabrics: [
-        { id: "fab-j1", name: "Pure Onyx Silk", colorHex: "#050505" },
-        { id: "fab-j2", name: "Ivory Gold Weave Silk", colorHex: "#F7F5F0" },
-        { id: "fab-j3", name: "Royal Emerald Silk", colorHex: "#0D2818" }
-      ]
-    },
-    sizes: ["Bespoke Custom Fit", "S", "M", "L", "XL"],
-    inStock: true
-  },
-  {
-    id: "men-3",
-    slug: "cashmere-opera-overcoat",
-    name: "The Cashmere Opera Overcoat",
-    tagline: "Double-breasted floor-length coat in virgin wool and Mongolian cashmere",
-    price: 4200,
-    formattedPrice: "$4,200 / ₦5,880,000",
-    mainCategory: "the-men-forge",
-    subcategory: "luxury-coats",
-    subcategoryName: "Luxury Coats",
-    featured: false,
-    isBespoke: true,
-    description: "Designed for dramatic presence, The Cashmere Opera Overcoat features sharp padded shoulders, deep peak lapels, and a sweeping silhouette lined in gold cupro.",
-    details: [
-      "90% Virgin Wool, 10% Mongolian Cashmere",
-      "Full cupro lining in signature gold jacquard",
-      "Buffalo horn buttons with gold engraving",
-      "Hand-stitched pick detailing along collar"
-    ],
-    fabricCare: [
-      "Dry clean only",
-      "Do not tumble dry"
-    ],
-    images: [
-      {
-        id: "img-m3-1",
-        src: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1200&q=85",
-        alt: "Cashmere Opera Overcoat"
-      }
-    ],
-    sizes: ["Bespoke Custom Fit", "48 EU", "50 EU", "52 EU"],
+    sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
     inStock: true
   },
 
-  // --- THE LADY FORGE ---
+  {
+    id: "men-2",
+    slug: "forge-cargo-pant",
+    name: "The Forge Cargo Pant",
+    tagline: "Relaxed-fit tactical cargo with signature gold hardware",
+    price: 55000,
+    formattedPrice: fmt(55000),
+    mainCategory: "the-men-forge",
+    subcategory: "streetwear",
+    subcategoryName: "Streetwear",
+    featured: true,
+    isBespoke: false,
+    description: "Built for the streets, refined for The Forge. Our cargo pant is cut in a relaxed straight silhouette from durable cotton canvas with six functional pockets, taped seams, and signature gold zip pulls throughout. Pairs with the Forge Vintage Shirt or any graphic tee.",
+    details: [
+      "98% cotton canvas, 2% elastane",
+      "Six functional pockets including two cargo side pockets",
+      "Signature gold YKK zip hardware",
+      "Taped seams for durability",
+      "Elastic waistband with drawstring"
+    ],
+    fabricCare: ["Machine wash cold", "Tumble dry low", "Iron on low heat"],
+    images: [
+      { id: "img-m2-1", src: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=1200&q=85", alt: "Forge Cargo Pant" },
+      { id: "img-m2-2", src: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1200&q=85", alt: "Cargo detail" }
+    ],
+    sizes: ["28", "30", "32", "34", "36", "38"],
+    inStock: true
+  },
+
+  {
+    id: "men-3",
+    slug: "forge-street-jacket",
+    name: "The Forge Street Jacket",
+    tagline: "Oversized utility jacket in waxed cotton with embossed Forge branding",
+    price: 85000,
+    formattedPrice: fmt(85000),
+    mainCategory: "the-men-forge",
+    subcategory: "streetwear",
+    subcategoryName: "Streetwear",
+    featured: false,
+    isBespoke: false,
+    description: "An oversized street-to-event jacket that defines The Forge aesthetic -- utilitarian structure meets luxury finish. Waxed cotton exterior, satin-touch lining, and embossed Forge branding on the back yoke.",
+    details: [
+      "Waxed 100% cotton outer",
+      "Satin-feel inner lining",
+      "Four exterior zip pockets",
+      "Embossed Forge logo rear yoke",
+      "Adjustable hem drawstring"
+    ],
+    fabricCare: ["Spot clean only", "Re-wax periodically to maintain finish"],
+    images: [
+      { id: "img-m3-1", src: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=85", alt: "Forge Street Jacket" }
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    inStock: true
+  },
+
+  {
+    id: "men-4",
+    slug: "forge-jogger",
+    name: "The Forge Signature Jogger",
+    tagline: "Premium French terry jogger with gold ankle zip and embroidered logo",
+    price: 42000,
+    formattedPrice: fmt(42000),
+    mainCategory: "the-men-forge",
+    subcategory: "streetwear",
+    subcategoryName: "Streetwear",
+    featured: false,
+    isBespoke: false,
+    description: "The Forge Jogger is the premium take on an everyday essential. French terry cotton, tapered from thigh to ankle, finished with a gold ankle zip and embroidered Forge wordmark at the left thigh.",
+    details: [
+      "300gsm French terry cotton",
+      "Tapered silhouette with gold ankle zip",
+      "Embroidered logo at left thigh",
+      "Deep side pockets and back zip pocket",
+      "Ribbed waistband with internal drawstring"
+    ],
+    fabricCare: ["Machine wash cold inside out", "Do not tumble dry", "Iron on low"],
+    images: [
+      { id: "img-m4-1", src: "https://images.unsplash.com/photo-1529391409740-59f2cea08bc4?auto=format&fit=crop&w=1200&q=85", alt: "Forge Signature Jogger" }
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    inStock: true
+  },
+
+  {
+    id: "men-5",
+    slug: "forge-corporate-trouser",
+    name: "The Forge Corporate Trouser",
+    tagline: "Slim-tapered corporate pant in Italian wool-blend suiting fabric",
+    price: 65000,
+    formattedPrice: fmt(65000),
+    mainCategory: "the-men-forge",
+    subcategory: "pants",
+    subcategoryName: "Pants",
+    featured: false,
+    isBespoke: false,
+    description: "Elevated office dressing starts here. Cut from a mid-weight Italian wool-blend with a slight sheen, the Forge Corporate Trouser delivers a razor-clean silhouette that holds its shape all day.",
+    details: [
+      "Italian wool-blend suiting fabric",
+      "Slim tapered cut from hip to ankle",
+      "Flat-front with side-adjusters",
+      "Satin-tape inner leg seam",
+      "Available in custom length at checkout"
+    ],
+    fabricCare: ["Dry clean recommended", "Steam to refresh"],
+    images: [
+      { id: "img-m5-1", src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=85", alt: "Forge Corporate Trouser" }
+    ],
+    sizes: ["28", "30", "32", "34", "36", "38", "Custom Length"],
+    inStock: true
+  },
+
+  {
+    id: "men-6",
+    slug: "forge-palazzo-pant",
+    name: "The Forge Palazzo Pant",
+    tagline: "Wide-leg relaxed palazzo in breathable linen-cotton blend",
+    price: 48000,
+    formattedPrice: fmt(48000),
+    mainCategory: "the-men-forge",
+    subcategory: "pants",
+    subcategoryName: "Pants",
+    featured: false,
+    isBespoke: false,
+    description: "A modern Nigerian man does not compromise comfort for style. The Forge Palazzo gives you both -- a wide relaxed leg in a breathable linen-cotton blend that moves effortlessly from casual events to dinners.",
+    details: [
+      "55% linen, 45% cotton",
+      "High-rise wide leg silhouette",
+      "Elasticated back waistband",
+      "Side slip pockets",
+      "Breathable and fast-drying"
+    ],
+    fabricCare: ["Machine wash cold", "Line dry", "Cool iron"],
+    images: [
+      { id: "img-m6-1", src: "https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?auto=format&fit=crop&w=1200&q=85", alt: "Forge Palazzo Pant" }
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    inStock: true
+  },
+
+  {
+    id: "men-7",
+    slug: "forge-snapback-cap",
+    name: "The Forge Snapback Cap",
+    tagline: "Structured six-panel cap with gold embroidered Forge crest",
+    price: 18000,
+    formattedPrice: fmt(18000),
+    mainCategory: "the-men-forge",
+    subcategory: "caps",
+    subcategoryName: "Caps",
+    featured: false,
+    isBespoke: false,
+    description: "Statement headwear for the Forge man. A structured six-panel snapback in premium wool-blend with the gold-thread embroidered Forge crest front and centre. Adjustable snapback closure fits all head sizes.",
+    details: [
+      "Structured wool-blend front panels",
+      "Gold-thread embroidered Forge crest",
+      "Flat brim with Forge branding underside",
+      "Adjustable plastic snapback closure",
+      "Sweat-wicking inner headband"
+    ],
+    fabricCare: ["Spot clean only", "Do not machine wash", "Air dry away from sunlight"],
+    images: [
+      { id: "img-m7-1", src: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=1200&q=85", alt: "Forge Snapback Cap" }
+    ],
+    sizes: ["One Size"],
+    inStock: true
+  },
+
+  {
+    id: "men-8",
+    slug: "forge-two-piece-set",
+    name: "The Forge 2-Piece Set",
+    tagline: "Matching shirt and trouser set in premium cotton-linen blend",
+    price: 95000,
+    formattedPrice: fmt(95000),
+    mainCategory: "the-men-forge",
+    subcategory: "two-piece",
+    subcategoryName: "2-Piece Outfits",
+    featured: true,
+    isBespoke: false,
+    description: "Coordinated dressing made effortless. The Forge 2-Piece brings together a relaxed long-sleeve shirt and matching wide-leg trouser in the same premium cotton-linen blend. Available in three signature Forge colourways.",
+    details: [
+      "60% cotton, 40% linen blend",
+      "Matching shirt and trouser in same fabric",
+      "Relaxed shirt with button-through placket",
+      "Wide-leg trouser with elasticated waist",
+      "Available in Obsidian Black, Sand Cream, and Forest Olive"
+    ],
+    fabricCare: ["Machine wash cold", "Line dry", "Cool iron"],
+    images: [
+      { id: "img-m8-1", src: "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1200&q=85", alt: "Forge 2-Piece Set" }
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    inStock: true
+  },
+
+  {
+    id: "men-9",
+    slug: "forge-embroidered-jalabiya",
+    name: "The Forge Embroidered Jalabiya",
+    tagline: "Premium cotton jalabiya with hand-embroidered Forge collar detail",
+    price: 75000,
+    formattedPrice: fmt(75000),
+    mainCategory: "the-men-forge",
+    subcategory: "jalabias",
+    subcategoryName: "Jalabias",
+    featured: true,
+    isBespoke: false,
+    description: "Heritage meets modern luxury. The Forge Jalabiya is cut from a heavy premium cotton with a structured silhouette and features hand-embroidered detailing around the collar, bib, and cuffs in contrasting thread. A statement piece for Eid, weddings, and high-profile events.",
+    details: [
+      "100% heavyweight premium cotton",
+      "Hand-embroidered collar, bib, and cuff detail",
+      "Concealed side pockets",
+      "Available in White, Navy, Black, and Sand",
+      "Tailored in Lagos"
+    ],
+    fabricCare: ["Hand wash cold or dry clean", "Steam gently", "Do not wring"],
+    images: [
+      { id: "img-m9-1", src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85", alt: "Forge Embroidered Jalabiya" }
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
+    inStock: true
+  },
+
+  {
+    id: "men-10",
+    slug: "forge-danshiki",
+    name: "The Forge Danshiki",
+    tagline: "Contemporary danshiki in Ankara and cotton-blend with modern cut",
+    price: 38000,
+    formattedPrice: fmt(38000),
+    mainCategory: "the-men-forge",
+    subcategory: "danshiki",
+    subcategoryName: "Danshiki",
+    featured: false,
+    isBespoke: false,
+    description: "A contemporary interpretation of the classic danshiki. The Forge version uses locally sourced Ankara fabric combined with a structured cotton body for a cleaner, more modern silhouette that works for both casual and semi-formal occasions.",
+    details: [
+      "Locally sourced premium Ankara fabric",
+      "Structured cotton-blend body",
+      "V-neck with embroidered placket",
+      "Side seam split hem",
+      "Available in rotating seasonal Ankara prints"
+    ],
+    fabricCare: ["Machine wash cold inside out", "Line dry", "Iron on reverse side"],
+    images: [
+      { id: "img-m10-1", src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=85", alt: "Forge Danshiki" }
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    inStock: true
+  },
+
+  // ── THE LADY FORGE ─────────────────────────────────────────────────────────
+
   {
     id: "lady-1",
-    slug: "aurelia-royal-silk-bridal-gown",
-    name: "The Aurelia Royal Silk Bridal Gown",
-    tagline: "Custom handmade wedding dress with cathedral train & Coral bead filigree accent",
-    price: 8900,
-    formattedPrice: "$8,900 / ₦12,460,000",
+    slug: "forge-corporate-dress",
+    name: "The Forge Corporate Dress",
+    tagline: "Structured midi dress in Italian ponte fabric with Forge monogram buttons",
+    price: 78000,
+    formattedPrice: fmt(78000),
     mainCategory: "the-lady-forge",
-    subcategory: "wedding-dresses",
-    subcategoryName: "Wedding Dresses",
+    subcategory: "corporate-dresses",
+    subcategoryName: "Corporate Dresses",
     featured: true,
-    isBespoke: true,
-    description: "The crown jewel of The Lady Forge bridal atelier. Combining a sculptured internal corset bodice with draped heavy duchesse silk satin, hand-attached French Chantilly lace, and optional Nigerian royal coral-crystal beadwork along the neckline.",
+    isBespoke: false,
+    description: "Power dressing redefined. The Forge Corporate Dress is a structured midi in Italian double ponte that holds its shape from morning meetings to evening events. Clean lines, a modest front slit, and signature Forge monogram buttons elevate this beyond the ordinary workwear dress.",
     details: [
-      "100% Italian Duchesse Silk Satin",
-      "Hand-boned internal corset for waist sculpt",
-      "French Chantilly lace accents with hand-beaded crystal & coral filigree",
-      "Includes matching silk organza veil",
-      "Over 200 hours of artisanal hand craftsmanship in Lagos & London"
+      "Italian double ponte fabric",
+      "Structured fit-and-flare midi silhouette",
+      "Forge monogram buttons on cuffs and centre back",
+      "Front inverted pleat for ease of movement",
+      "Concealed back zip with hook-and-eye closure"
     ],
-    fabricCare: [
-      "Specialist bridal preservation dry clean",
-      "Keep in acid-free archival garment box provided"
-    ],
+    fabricCare: ["Dry clean recommended", "Steam to refresh", "Do not tumble dry"],
     images: [
-      {
-        id: "img-l1-1",
-        src: "https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=1200&q=85",
-        alt: "The Aurelia Royal Silk Bridal Gown"
-      },
-      {
-        id: "img-l1-2",
-        src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85",
-        alt: "Bridal Gown Train and Lace Detail"
-      },
-      {
-        id: "img-l1-3",
-        src: "https://images.unsplash.com/photo-1546804784-896d0dca3800?auto=format&fit=crop&w=1200&q=85",
-        alt: "Bespoke Bridal Fitting"
-      }
+      { id: "img-l1-1", src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85", alt: "Forge Corporate Dress" },
+      { id: "img-l1-2", src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85", alt: "Corporate Dress detail" }
     ],
-    bespokeOptions: {
-      id: "b-l1",
-      name: "Haute Couture Bridal Fitting",
-      description: "Direct consultation and custom gown pattern created exclusively for your physique.",
-      measurementFields: ["Bust", "Underbust", "Waist", "Hips", "Hollow to Hem", "Shoe Height"],
-      availableFabrics: [
-        { id: "fab-b1", name: "Pure Ivory Duchesse Silk", colorHex: "#FFFDF9" },
-        { id: "fab-b2", name: "Warm Champagne Silk Satin", colorHex: "#F2E8D5" },
-        { id: "fab-b3", name: "Classic Pure White Silk", colorHex: "#FFFFFF" }
-      ]
-    },
-    sizes: ["Bespoke Custom Fit"],
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     inStock: true
   },
+
   {
     id: "lady-2",
-    slug: "obsidian-velvet-gold-embroidered-gala-gown",
-    name: "The Obsidian Velvet Gala Evening Gown",
-    tagline: "Sculpted column gown with gold filigree hand embroidery",
-    price: 4950,
-    formattedPrice: "$4,950 / ₦6,930,000",
+    slug: "forge-blazer",
+    name: "The Forge Power Blazer",
+    tagline: "Oversized double-breasted blazer with gold Forge crest buttons",
+    price: 95000,
+    formattedPrice: fmt(95000),
     mainCategory: "the-lady-forge",
-    subcategory: "couture-gowns",
-    subcategoryName: "Couture Gowns",
+    subcategory: "blazers",
+    subcategoryName: "Blazers",
     featured: true,
-    isBespoke: true,
-    description: "Designed for galas and royal receptions, this striking velvet gown features a deep architectural V-neckline framed in hand-worked metallic gold embroidery and a high thigh slit.",
+    isBespoke: false,
+    description: "The statement blazer that owns every room. An oversized double-breasted silhouette cut from a premium wool-blend suiting fabric with wide peak lapels and gold Forge crest buttons. Wear it over the matching trouser for the full power suit look or belted over a mini skirt.",
     details: [
-      "Micro-velvet with subtle stretch memory",
-      "Hand-beaded gold bullion thread around neckline & waistline",
-      "Hidden back zippering with silk-covered buttons",
-      "Floor-length with subtle fishtail flare"
+      "Premium wool-blend suiting fabric",
+      "Oversized double-breasted silhouette",
+      "Gold Forge crest embossed buttons",
+      "Wide peak lapels",
+      "Two welt pockets and one chest pocket"
     ],
-    fabricCare: ["Dry clean only by haute couture garment specialists"],
+    fabricCare: ["Dry clean only", "Steam to shape", "Store on wide hanger"],
     images: [
-      {
-        id: "img-l2-1",
-        src: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1200&q=85",
-        alt: "Obsidian Velvet Gala Evening Gown"
-      },
-      {
-        id: "img-l2-2",
-        src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85",
-        alt: "Gold Embroidered Gown Detail"
-      }
+      { id: "img-l2-1", src: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1200&q=85", alt: "Forge Power Blazer" }
     ],
-    bespokeOptions: {
-      id: "b-l2",
-      name: "Custom Couture Measurements",
-      description: "Tailored to accentuate your silhouette.",
-      measurementFields: ["Bust", "Waist", "Hips", "Height"],
-      availableFabrics: [
-        { id: "fab-g1", name: "Obsidian Black Velvet", colorHex: "#050505" },
-        { id: "fab-g2", name: "Midnight Sapphire Velvet", colorHex: "#081B33" }
-      ]
-    },
-    sizes: ["Bespoke Custom Fit", "36 EU", "38 EU", "40 EU", "42 EU"],
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     inStock: true
   },
+
   {
     id: "lady-3",
-    slug: "empress-double-breasted-silk-suit-set",
-    name: "The Empress Double-Breasted Silk Suit Set",
-    tagline: "Hand-tailored structured blazer with wide-leg trousers in heavy silk crepon",
-    price: 3600,
-    formattedPrice: "$3,600 / ₦5,040,000",
+    slug: "forge-lady-two-piece",
+    name: "The Forge Lady 2-Piece",
+    tagline: "Co-ord crop top and wide-leg trouser set in textured cotton",
+    price: 88000,
+    formattedPrice: fmt(88000),
     mainCategory: "the-lady-forge",
-    subcategory: "tailored-suits",
-    subcategoryName: "Tailored Suits",
-    featured: false,
-    isBespoke: true,
-    description: "Command power and elegance. The Empress Suit features sharp exaggerated peak lapels, 24K gold filigree buttons, and high-waisted fluid trousers that lengthen the silhouette.",
+    subcategory: "two-piece",
+    subcategoryName: "2-Piece Outfits",
+    featured: true,
+    isBespoke: false,
+    description: "The effortless co-ord for every occasion. A structured crop top and matching high-waisted wide-leg trouser in a premium textured cotton. Clean lines, minimal branding, maximum impact. Dress it up with heels or down with sneakers.",
     details: [
-      "100% Heavy Silk Crepon",
-      "Gold filigree crest buttons",
-      "Fully canvassed jacket body",
-      "High-rise wide leg trouser with front pleats"
+      "Textured premium cotton blend",
+      "Structured crop top with invisible back zip",
+      "High-waisted wide-leg trouser",
+      "Available in Black, Ivory, and Rust",
+      "Sold as a set"
     ],
-    fabricCare: ["Dry clean only"],
+    fabricCare: ["Machine wash cold", "Line dry", "Cool iron on reverse"],
     images: [
-      {
-        id: "img-l3-1",
-        src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85",
-        alt: "The Empress Double-Breasted Silk Suit Set"
-      }
+      { id: "img-l3-1", src: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1200&q=85", alt: "Forge Lady 2-Piece" }
     ],
-    sizes: ["Bespoke Custom Fit", "36 EU", "38 EU", "40 EU"],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    inStock: true
+  },
+
+  {
+    id: "lady-4",
+    slug: "forge-dinner-dress",
+    name: "The Forge Dinner Dress",
+    tagline: "Floor-length halter-neck evening dress in luxe crepe with open back",
+    price: 120000,
+    formattedPrice: fmt(120000),
+    mainCategory: "the-lady-forge",
+    subcategory: "dinner-birthday",
+    subcategoryName: "Dinner and Birthday Dresses",
+    featured: true,
+    isBespoke: false,
+    description: "Made to be remembered. The Forge Dinner Dress is a floor-length halter-neck in heavyweight crepe with a dramatic open back and a subtle side slit. Minimal adornment -- the silhouette does all the work.",
+    details: [
+      "Heavyweight crepe with natural drape",
+      "Halter neck with adjustable tie",
+      "Open back with concealed hook-and-eye closure",
+      "Side slit at right leg",
+      "Fully lined in silk-touch fabric"
+    ],
+    fabricCare: ["Dry clean only", "Store hanging on padded hanger"],
+    images: [
+      { id: "img-l4-1", src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85", alt: "Forge Dinner Dress" },
+      { id: "img-l4-2", src: "https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=1200&q=85", alt: "Dinner Dress back detail" }
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    inStock: true
+  },
+
+  {
+    id: "lady-5",
+    slug: "forge-birthday-mini",
+    name: "The Forge Birthday Mini",
+    tagline: "Figure-hugging bandage mini in stretch crepe with cutout detail",
+    price: 65000,
+    formattedPrice: fmt(65000),
+    mainCategory: "the-lady-forge",
+    subcategory: "dinner-birthday",
+    subcategoryName: "Dinner and Birthday Dresses",
+    featured: false,
+    isBespoke: false,
+    description: "Your birthday outfit sorted. A body-conscious stretch-crepe mini with a signature waist cutout and one-shoulder neckline. Designed to make an entrance and stay comfortable all night.",
+    details: [
+      "Stretch crepe with recovery",
+      "One-shoulder neckline",
+      "Waist cutout panel",
+      "Rear concealed zip",
+      "Fully lined"
+    ],
+    fabricCare: ["Hand wash cold", "Line dry", "Do not tumble dry"],
+    images: [
+      { id: "img-l5-1", src: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=85", alt: "Forge Birthday Mini" }
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
     inStock: true
   }
 ];
 
 export const MOCK_COLLECTIONS: Collection[] = [
   {
-    id: "col-men-signature",
-    slug: "the-men-forge-collection",
+    id: "col-men",
+    slug: "the-men-forge",
     title: "THE MEN FORGE",
-    subtitle: "Bespoke Tailoring, Luxury Suits & Regal Jalamias",
-    description: "Sovereign power expressed through razor-sharp tailoring, silk velvet dinner jackets, and gold-embroidered royal kaftans.",
+    subtitle: "Vintage. Streetwear. Culture. Lagos.",
+    description: "From premium Oxford shirts and cargo pants to embroidered Jalabias and Danshikis -- The Men Forge is built for the Nigerian man who does not compromise.",
     mainCategory: "the-men-forge",
     heroImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1800&q=85",
     products: MOCK_PRODUCTS.filter(p => p.mainCategory === "the-men-forge")
   },
   {
-    id: "col-lady-signature",
-    slug: "the-lady-forge-collection",
+    id: "col-lady",
+    slug: "the-lady-forge",
     title: "THE LADY FORGE",
-    subtitle: "Haute Couture, Bespoke Bridal & Velvet Gowns",
-    description: "Artisanal elegance crafted to perfection. Discover bespoke wedding dresses, sculpted gala gowns, and tailored silk suits.",
+    subtitle: "Corporate. Dinner. Celebration.",
+    description: "Power blazers, corporate dresses, co-ord sets, and dinner gowns. The Lady Forge is for the Nigerian woman who dresses with intention.",
     mainCategory: "the-lady-forge",
     heroImage: "https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=1800&q=85",
     products: MOCK_PRODUCTS.filter(p => p.mainCategory === "the-lady-forge")

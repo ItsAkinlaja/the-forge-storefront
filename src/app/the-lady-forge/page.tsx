@@ -11,14 +11,15 @@ import { wpClient } from "@/lib/wordpress/client";
 import { Product, LadySubcategory } from "@/types";
 
 const FILTERS: { label: string; value: LadySubcategory | "all" }[] = [
-  { label: "All Collection", value: "all" },
-  { label: "Wedding and Bridal", value: "wedding-dresses" },
-  { label: "Couture Gowns", value: "couture-gowns" },
-  { label: "Tailored Suits", value: "tailored-suits" },
+  { label: "All",                 value: "all"               },
+  { label: "Corporate Dresses",   value: "corporate-dresses" },
+  { label: "Blazers",             value: "blazers"           },
+  { label: "2-Piece Outfits",     value: "two-piece"         },
+  { label: "Dinner and Birthday", value: "dinner-birthday"   },
 ];
 
 export default function LadyForgePage() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts]                       = useState<Product[]>([]);
   const [selectedSubcategory, setSelectedSubcategory] = useState<LadySubcategory | "all">("all");
   const [selectedProductForFit, setSelectedProductForFit] = useState<Product | null>(null);
 
@@ -26,38 +27,37 @@ export default function LadyForgePage() {
     wpClient.getProducts({ mainCategory: "the-lady-forge" }).then(setProducts);
   }, []);
 
-  const filtered = selectedSubcategory === "all" ? products : products.filter(p => p.subcategory === selectedSubcategory);
+  const filtered = selectedSubcategory === "all"
+    ? products
+    : products.filter(p => p.subcategory === selectedSubcategory);
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-[#050505] text-[#050505] dark:text-white transition-colors duration-300">
       <Navbar />
-
       <main className="flex-1">
-        {/* Banner */}
+
         <section className="relative h-[50vh] min-h-[380px] w-full flex items-end justify-start overflow-hidden border-b border-[#E5E5E5] dark:border-[#1C1C1C]">
           <Image
             src="https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=1800&q=85"
-            alt="The Lady Forge Collection"
-            fill
-            priority
+            alt="The Lady Forge"
+            fill priority
             className="object-cover object-top brightness-[0.35]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-[#050505]/40 to-transparent" />
           <div className="relative z-10 px-8 sm:px-16 pb-12 sm:pb-16 space-y-3 max-w-2xl">
             <p className="text-[10px] uppercase tracking-[0.45em] text-[#C6A15B] font-semibold">
-              Haute Couture and Bespoke Bridalwear
+              Corporate. Dinner. Celebration.
             </p>
             <h1 className="font-editorial text-5xl sm:text-6xl text-white font-light leading-tight">
               The Lady Forge
             </h1>
             <p className="text-xs text-[#B0B0B0] font-light leading-relaxed max-w-md">
-              Bespoke wedding dresses, cathedral bridal gowns, obsidian velvet gala gowns, and tailored silk suits crafted for individual elegance.
+              Corporate dresses, power blazers, casual 2-pieces, and dinner gowns -- for the Nigerian woman who dresses with intention.
             </p>
           </div>
         </section>
 
-        {/* Filter + Catalog */}
-        <section className="py-14 bg-white dark:bg-[#050505] transition-colors duration-300">
+        <section className="py-14 bg-white dark:bg-[#050505]">
           <Container size="wide">
             <div className="flex items-center justify-start flex-wrap gap-2 mb-12 border-b border-[#E5E5E5] dark:border-[#1C1C1C] pb-6">
               {FILTERS.map(f => (
@@ -75,7 +75,6 @@ export default function LadyForgePage() {
               ))}
               <span className="ml-auto text-xs text-[#8E8E93] dark:text-[#555555] uppercase tracking-wider">{filtered.length} pieces</span>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map(product => (
                 <ProductCard key={product.id} product={product} onOpenFitDrawer={p => setSelectedProductForFit(p)} />
@@ -83,8 +82,8 @@ export default function LadyForgePage() {
             </div>
           </Container>
         </section>
-      </main>
 
+      </main>
       <CustomFitDrawer product={selectedProductForFit} isOpen={!!selectedProductForFit} onClose={() => setSelectedProductForFit(null)} />
       <Footer />
     </div>

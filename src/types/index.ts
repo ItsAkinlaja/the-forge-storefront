@@ -1,18 +1,20 @@
 export type MainCategory = "the-men-forge" | "the-lady-forge";
 
-export type MenSubcategory = 
-  | "suits-blazers" 
-  | "jalamia-kaftans" 
-  | "luxury-coats" 
-  | "custom-trousers" 
-  | "bespoke-shirts";
+export type MenSubcategory =
+  | "vintage-shirts"
+  | "streetwear"
+  | "pants"
+  | "caps"
+  | "two-piece"
+  | "jalabias"
+  | "danshiki"
+  | "casual";
 
-export type LadySubcategory = 
-  | "wedding-dresses" 
-  | "couture-gowns" 
-  | "tailored-suits" 
-  | "handmade-dresses" 
-  | "corsetry-bustiers";
+export type LadySubcategory =
+  | "corporate-dresses"
+  | "blazers"
+  | "two-piece"
+  | "dinner-birthday";
 
 export type Subcategory = MenSubcategory | LadySubcategory;
 
@@ -28,7 +30,7 @@ export interface BespokeFittingOption {
   id: string;
   name: string;
   description: string;
-  measurementFields: string[]; // e.g. ["Chest/Bust", "Waist", "Hips", "Shoulder Width", "Sleeve Length", "Total Length"]
+  measurementFields: string[];
   availableFabrics: {
     id: string;
     name: string;

@@ -82,7 +82,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
   return (
     <>
-      {/* â”€â”€ Main header â”€â”€ */}
+      {/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main header ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */}
       <header
         className={`${overlay ? "absolute left-0 right-0 z-50" : "sticky top-0 z-50"} transition-all duration-300 ${
           isTransparent
@@ -209,7 +209,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
         </Container>
       </header>
 
-      {/* â”€â”€ Mobile drawer overlay â”€â”€ */}
+      {/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Mobile drawer overlay ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */}
       {/* Backdrop */}
       <div
         onClick={closeDrawer}
@@ -254,9 +254,13 @@ export function Navbar({ overlay = false }: NavbarProps) {
                 <div className="py-2 pl-4 space-y-1">
                   {[
                     { href: "/the-men-forge", label: "All Collections" },
-                    { href: "/the-men-forge/suits-blazers", label: "Suits and Tuxedos" },
-                    { href: "/the-men-forge/jalamia-kaftans", label: "Jalamias and Kaftans" },
-                    { href: "/the-men-forge/luxury-coats", label: "Luxury Coats" },
+                    { href: "/the-men-forge/vintage-shirts", label: "Vintage by Forge" },
+                    { href: "/the-men-forge/streetwear", label: "Streetwear" },
+                    { href: "/the-men-forge/pants", label: "Pants" },
+                    { href: "/the-men-forge/two-piece", label: "2-Piece Outfits" },
+                    { href: "/the-men-forge/jalabias", label: "Jalabias" },
+                    { href: "/the-men-forge/danshiki", label: "Danshiki" },
+                    { href: "/the-men-forge/caps", label: "Caps" },
                   ].map((item) => (
                     <Link
                       key={item.href}
@@ -285,9 +289,10 @@ export function Navbar({ overlay = false }: NavbarProps) {
                 <div className="py-2 pl-4 space-y-1">
                   {[
                     { href: "/the-lady-forge", label: "All Collections" },
-                    { href: "/the-lady-forge/wedding-dresses", label: "Wedding and Bridal" },
-                    { href: "/the-lady-forge/couture-gowns", label: "Couture Gala Gowns" },
-                    { href: "/the-lady-forge/tailored-suits", label: "Tailored Suits" },
+                    { href: "/the-lady-forge/corporate-dresses", label: "Corporate Dresses" },
+                    { href: "/the-lady-forge/blazers", label: "Blazers" },
+                    { href: "/the-lady-forge/two-piece", label: "2-Piece Outfits" },
+                    { href: "/the-lady-forge/dinner-birthday", label: "Dinner and Birthday" },
                   ].map((item) => (
                     <Link
                       key={item.href}

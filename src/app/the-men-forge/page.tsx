@@ -11,14 +11,18 @@ import { wpClient } from "@/lib/wordpress/client";
 import { Product, MenSubcategory } from "@/types";
 
 const FILTERS: { label: string; value: MenSubcategory | "all" }[] = [
-  { label: "All Collection", value: "all" },
-  { label: "Suits and Tuxedos", value: "suits-blazers" },
-  { label: "Jalamias and Kaftans", value: "jalamia-kaftans" },
-  { label: "Luxury Overcoats", value: "luxury-coats" },
+  { label: "All",            value: "all"            },
+  { label: "Vintage Shirts", value: "vintage-shirts" },
+  { label: "Streetwear",     value: "streetwear"     },
+  { label: "Pants",          value: "pants"          },
+  { label: "2-Piece",        value: "two-piece"      },
+  { label: "Jalabias",       value: "jalabias"       },
+  { label: "Danshiki",       value: "danshiki"       },
+  { label: "Caps",           value: "caps"           },
 ];
 
 export default function MenForgePage() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts]                       = useState<Product[]>([]);
   const [selectedSubcategory, setSelectedSubcategory] = useState<MenSubcategory | "all">("all");
   const [selectedProductForFit, setSelectedProductForFit] = useState<Product | null>(null);
 
@@ -26,40 +30,38 @@ export default function MenForgePage() {
     wpClient.getProducts({ mainCategory: "the-men-forge" }).then(setProducts);
   }, []);
 
-  const filtered = selectedSubcategory === "all" ? products : products.filter(p => p.subcategory === selectedSubcategory);
+  const filtered = selectedSubcategory === "all"
+    ? products
+    : products.filter(p => p.subcategory === selectedSubcategory);
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-[#050505] text-[#050505] dark:text-white transition-colors duration-300">
       <Navbar />
-
       <main className="flex-1">
-        {/* Banner */}
+
         <section className="relative h-[50vh] min-h-[380px] w-full flex items-end justify-start overflow-hidden border-b border-[#E5E5E5] dark:border-[#1C1C1C]">
           <Image
             src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1800&q=85"
-            alt="The Men Forge Collection"
-            fill
-            priority
+            alt="The Men Forge"
+            fill priority
             className="object-cover object-center brightness-[0.35]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-[#050505]/40 to-transparent" />
           <div className="relative z-10 px-8 sm:px-16 pb-12 sm:pb-16 space-y-3 max-w-2xl">
             <p className="text-[10px] uppercase tracking-[0.45em] text-[#C6A15B] font-semibold">
-              Sovereign Menswear and Nigerian Bespoke Tailoring
+              Vintage. Streetwear. Culture. Lagos.
             </p>
             <h1 className="font-editorial text-5xl sm:text-6xl text-white font-light leading-tight">
               The Men Forge
             </h1>
             <p className="text-xs text-[#B0B0B0] font-light leading-relaxed max-w-md">
-              Bespoke tuxedos, 24K gold-embroidered Jalamias, tailored cashmere overcoats, and custom trousers crafted to your measurements.
+              Premium shirts, cargo pants, joggers, jalabias, danshikis, caps, and 2-piece sets -- crafted for the Nigerian man who does not compromise.
             </p>
           </div>
         </section>
 
-        {/* Filter + Catalog */}
-        <section className="py-14 bg-white dark:bg-[#050505] transition-colors duration-300">
+        <section className="py-14 bg-white dark:bg-[#050505]">
           <Container size="wide">
-            {/* Filter bar */}
             <div className="flex items-center justify-start flex-wrap gap-2 mb-12 border-b border-[#E5E5E5] dark:border-[#1C1C1C] pb-6">
               {FILTERS.map(f => (
                 <button
@@ -76,8 +78,6 @@ export default function MenForgePage() {
               ))}
               <span className="ml-auto text-xs text-[#8E8E93] dark:text-[#555555] uppercase tracking-wider">{filtered.length} pieces</span>
             </div>
-
-            {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map(product => (
                 <ProductCard key={product.id} product={product} onOpenFitDrawer={p => setSelectedProductForFit(p)} />
@@ -85,8 +85,8 @@ export default function MenForgePage() {
             </div>
           </Container>
         </section>
-      </main>
 
+      </main>
       <CustomFitDrawer product={selectedProductForFit} isOpen={!!selectedProductForFit} onClose={() => setSelectedProductForFit(null)} />
       <Footer />
     </div>
