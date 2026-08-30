@@ -12,7 +12,7 @@ import { useTheme } from "@/components/theme/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 
 const LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
-const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788079650893.jpeg";
+const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902.jpeg";
 
 export function Navbar() {
   const [scrolled, setScrolled]             = useState(false);

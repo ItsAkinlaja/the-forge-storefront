@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { useTheme } from "@/components/theme/ThemeContext";
 
 const LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
-const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788079650893.jpeg";
+const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902.jpeg";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -43,7 +43,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] flex flex-col lg:flex-row">
 
-      {/* ── LEFT: image panel (desktop only) ── */}
+      {/* â”€â”€ LEFT: image panel (desktop only) â”€â”€ */}
       <div className="hidden lg:block relative w-[45%] xl:w-1/2 min-h-screen flex-shrink-0">
         <Image
           src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1400&q=90"
@@ -67,7 +67,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* ── RIGHT: form panel ── */}
+      {/* â”€â”€ RIGHT: form panel â”€â”€ */}
       <div className="flex-1 flex flex-col min-h-screen">
 
         {/* top bar */}
@@ -170,7 +170,7 @@ export default function LoginPage() {
         {/* bottom bar */}
         <div className="px-6 sm:px-10 py-5 border-t border-[#EBEBEB] dark:border-[#181818]">
           <p className="text-[9px] uppercase tracking-[0.3em] text-[#BBBBBB] dark:text-[#333333] font-sans">
-            The Forge — Haute Couture and Handmade Custom Dressing
+            The Forge â€” Haute Couture and Handmade Custom Dressing
           </p>
         </div>
 
