@@ -82,7 +82,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
   return (
     <>
-      {/* ── Main header ── */}
+      {/* â”€â”€ Main header â”€â”€ */}
       <header
         className={`${overlay ? "absolute left-0 right-0 z-50" : "sticky top-0 z-50"} transition-all duration-300 ${
           isTransparent
@@ -209,7 +209,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
         </Container>
       </header>
 
-      {/* ── Mobile drawer overlay ── */}
+      {/* â”€â”€ Mobile drawer overlay â”€â”€ */}
       {/* Backdrop */}
       <div
         onClick={closeDrawer}
@@ -219,7 +219,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
       {/* Drawer panel -- slides from right */}
       <div
-        className={`fixed top-0 right-0 h-full w-[85vw] max-w-[360px] z-[80] lg:hidden flex flex-col bg-white dark:bg-[#050505] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 h-[100dvh] w-[85vw] max-w-[360px] z-[80] lg:hidden flex flex-col bg-white dark:bg-[#050505] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#EBEBEB] dark:border-[#181818] flex-shrink-0">
@@ -236,7 +236,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
         </div>
 
         {/* Drawer body */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto min-h-0">
 
           {/* Main links */}
           <div className="px-6 pt-6 space-y-1">
