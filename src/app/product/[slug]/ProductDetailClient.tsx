@@ -217,6 +217,9 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#888888] dark:text-[#555555] font-sans font-semibold">
                   Select Size
                 </span>
+                <Link href="/size-guide" className="text-[10px] uppercase tracking-wider text-[#888888] dark:text-[#555555] underline hover:text-[#C6A15B] transition-colors font-sans">
+                  Size Guide
+                </Link>
                 {product.isBespoke && (
                   <button
                     onClick={() => setFitDrawerOpen(true)}
@@ -370,25 +373,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
         </div>
       )}
 
-      {/* Mobile sticky Add to Bag bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden border-t border-[#E5E5E5] dark:border-[#1C1C1C] bg-white dark:bg-[#050505] p-4 flex gap-3">
-        <Button
-          variant="outline"
-          size="md"
-          onClick={handleAddToBag}
-          className="flex-1"
-        >
-          Add to Bag
-        </Button>
-        <Button
-          variant="gold"
-          size="md"
-          onClick={handleBuyNow}
-          className="flex-1"
-        >
-          Buy Now
-        </Button>
-      </div>
+
 
       <CustomFitDrawer
         product={product}

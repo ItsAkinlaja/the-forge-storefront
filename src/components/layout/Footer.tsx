@@ -1,10 +1,66 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MapPin, Phone, Mail } from "lucide-react";
+
+const WP_BASE = "https://central.theforgebrand.shop";
+
+function NewsletterForm() {
+  const [email, setEmail]     = useState("");
+  const [status, setStatus]   = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setStatus("loading");
+    try {
+      const res = await fetch(`${WP_BASE}/wp-json/forge/v1/subscribe`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.message || "Something went wrong.");
+      setStatus("success");
+      setMessage("You are on the list.");
+      setEmail("");
+    } catch (err: unknown) {
+      setStatus("error");
+      setMessage(err instanceof Error ? err.message : "Could not subscribe. Try again.");
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      <h4 className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#050505] dark:text-white font-semibold">Stay in the Loop</h4>
+      <p className="text-xs text-[#666666] dark:text-[#8E8E93] leading-relaxed">New drops, exclusive offers, and Forge events -- straight to your inbox.</p>
+      {status === "success" ? (
+        <p className="text-xs text-[#C6A15B] font-sans py-2">{message}</p>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-2">
+          <input
+            type="email"
+            required
+            placeholder="Your email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full bg-white dark:bg-[#121212] border border-[#E5E5E5] dark:border-[#262626] px-3 py-3 text-xs text-[#050505] dark:text-white focus:outline-none focus:border-[#C6A15B] placeholder:text-[#AAAAAA] dark:placeholder:text-[#555555] rounded-none"
+          />
+          {status === "error" && (
+            <p className="text-[11px] text-red-500 font-sans">{message}</p>
+          )}
+          <Button variant="gold" size="sm" className="w-full py-2.5" disabled={status === "loading"}>
+            {status === "loading" ? "Subscribing..." : "Subscribe"}
+          </Button>
+        </form>
+      )}
+    </div>
+  );
+}
 
 export function Footer() {
   return (
@@ -134,22 +190,12 @@ export function Footer() {
               <li><Link href="/account" className="hover:text-[#050505] dark:hover:text-white transition-colors">My Account</Link></li>
               <li><Link href="/cart" className="hover:text-[#050505] dark:hover:text-white transition-colors">Shopping Bag</Link></li>
               <li><Link href="/search" className="hover:text-[#050505] dark:hover:text-white transition-colors">Search</Link></li>
+              <li><Link href="/size-guide" className="hover:text-[#C6A15B] transition-colors">Size Guide</Link></li>
             </ul>
           </div>
 
           {/* Newsletter */}
-          <div className="space-y-4">
-            <h4 className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#050505] dark:text-white font-semibold">Stay in the Loop</h4>
-            <p className="text-xs text-[#666666] dark:text-[#8E8E93] leading-relaxed">New drops, exclusive offers, and Forge events -- straight to your inbox.</p>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="w-full bg-white dark:bg-[#121212] border border-[#E5E5E5] dark:border-[#262626] px-3 py-3 text-xs text-[#050505] dark:text-white focus:outline-none focus:border-[#C6A15B] placeholder:text-[#AAAAAA] dark:placeholder:text-[#555555] rounded-none"
-              />
-              <Button variant="gold" size="sm" className="w-full py-2.5">Subscribe</Button>
-            </form>
-          </div>
+          <NewsletterForm />
 
         </div>
 

@@ -141,7 +141,7 @@ export function CustomFitDrawer({ product, isOpen, onClose }: CustomFitDrawerPro
 
                   <div className="space-y-2">
                     <label className="block text-[11px] uppercase tracking-wider text-[#646469] dark:text-[#8E8E93]">Personal Fit Requests / Atelier Notes</label>
-                    <textarea rows={3} placeholder="e.g. Prefer athletic drop, extra room at shoulders, specific embroidery placement..." value={formData.customNotes} onChange={e => handleInputChange("customNotes", e.target.value)} className={`${inputClass} resize-none`} />
+                    <textarea rows={3} placeholder="e.g. Prefer athletic drop, extra room at shoulders, specific embroidery placement..." value={formData.customNotes} onChange={e => handleInputChange("customNotes", e.target.value)} className={`${inputClass} resize-none`} style={{ fontSize: "16px" }} />
                   </div>
 
                   <Button variant="gold" size="lg" className="w-full py-4 flex items-center justify-center gap-2">

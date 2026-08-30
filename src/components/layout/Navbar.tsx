@@ -24,6 +24,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [menOpen, setMenOpen]               = useState(false);
   const [ladyOpen, setLadyOpen]             = useState(false);
+  const [styleToolsOpen, setStyleToolsOpen] = useState(false);
   const [accountOpen, setAccountOpen]       = useState(false);
   const [drawerMenOpen, setDrawerMenOpen]   = useState(false);
   const [drawerLadyOpen, setDrawerLadyOpen] = useState(false);
@@ -148,8 +149,22 @@ export function Navbar({ overlay = false }: NavbarProps) {
             </Link>
 
             <Link href="/editorial" className={`transition-colors ${textColor} ${goldHover}`}>
-              Lookbook
+              Forge Gallery
             </Link>
+
+            <div className="relative py-2" onMouseEnter={() => setStyleToolsOpen(true)} onMouseLeave={() => setStyleToolsOpen(false)}>
+              <button className={`flex items-center gap-1 text-[11px] tracking-[0.18em] uppercase font-sans transition-colors ${textColor} ${goldHover}`}>
+                Style Tools
+                <ChevronDown className="w-3 h-3 opacity-50" />
+              </button>
+              {styleToolsOpen && (
+                <div className="absolute top-full right-0 w-52 bg-white dark:bg-[#0A0A0A] border border-[#EBEBEB] dark:border-[#1C1C1C] py-3 shadow-xl z-50">
+                  <p className="text-[9px] text-[#C6A15B] uppercase tracking-[0.25em] font-semibold px-4 pb-2 border-b border-[#EBEBEB] dark:border-[#1C1C1C]">Style Tools</p>
+                  <Link href="/size-guide" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Size Chart</Link>
+                  <Link href="/size-estimator" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Size Calculator</Link>
+                </div>
+              )}
+            </div>
 
             <div className={`w-px h-4 ${isTransparent ? "bg-white/20" : "bg-[#E0E0E0] dark:bg-[#2A2A2A]"}`} />
 
@@ -310,7 +325,9 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
             {/* Standalone links */}
             {[
-              { href: "/custom-dressing", label: "Custom Fitting", accent: true },
+              { href: "/size-guide",     label: "Size Chart",     accent: false },
+              { href: "/size-estimator", label: "Size Calculator", accent: false },
+              { href: "/custom-dressing", label: "Book a Fitting", accent: true },
               { href: "/editorial", label: "Forge Gallery", accent: false },
               { href: "/search", label: "Search", accent: false },
             ].map((item) => (

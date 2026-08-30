@@ -424,7 +424,7 @@ export default function CustomDressingPage() {
                           placeholder="Your full name"
                           value={form.fullName}
                           onChange={(e) => set("fullName", e.target.value)}
-                          className={`${inputClass} ${errors.fullName ? "border-red-500" : ""}`}
+                          className={`${inputClass} ${errors.fullName ? "border-red-500" : ""}`} style={{ fontSize: "16px" }}
                         />
                         {errors.fullName && (
                           <p className="text-[11px] text-red-500 mt-1 font-sans">
@@ -442,7 +442,7 @@ export default function CustomDressingPage() {
                           placeholder="you@example.com"
                           value={form.email}
                           onChange={(e) => set("email", e.target.value)}
-                          className={`${inputClass} ${errors.email ? "border-red-500" : ""}`}
+                          className={`${inputClass} ${errors.email ? "border-red-500" : ""}`} style={{ fontSize: "16px" }}
                         />
                         {errors.email && (
                           <p className="text-[11px] text-red-500 mt-1 font-sans">{errors.email}</p>
@@ -461,7 +461,7 @@ export default function CustomDressingPage() {
                         placeholder="+234 800 000 0000"
                         value={form.phone}
                         onChange={(e) => set("phone", e.target.value)}
-                        className={`${inputClass} ${errors.phone ? "border-red-500" : ""}`}
+                        className={`${inputClass} ${errors.phone ? "border-red-500" : ""}`} style={{ fontSize: "16px" }}
                       />
                       {errors.phone && (
                         <p className="text-[11px] text-red-500 mt-1 font-sans">{errors.phone}</p>
@@ -503,7 +503,7 @@ export default function CustomDressingPage() {
                         value={form.garmentType}
                         onChange={(e) => set("garmentType", e.target.value)}
                         disabled={!form.gender}
-                        className={`${inputClass} ${errors.garmentType ? "border-red-500" : ""} disabled:opacity-50 disabled:cursor-not-allowed`}
+                        className={`${inputClass} ${errors.garmentType ? "border-red-500" : ""} disabled:opacity-50 disabled:cursor-not-allowed`} style={{ fontSize: "16px" }}
                       >
                         <option value="">
                           {form.gender ? "Select garment type" : "Select gender first"}
@@ -549,7 +549,7 @@ export default function CustomDressingPage() {
                         placeholder="Describe the style, cut, fit, details you want. The more specific the better."
                         value={form.description}
                         onChange={(e) => set("description", e.target.value)}
-                        className={`${inputClass} resize-none ${errors.description ? "border-red-500" : ""}`}
+                        className={`${inputClass} resize-none ${errors.description ? "border-red-500" : ""}`} style={{ fontSize: "16px" }}
                       />
                       {errors.description && (
                         <p className="text-[11px] text-red-500 mt-1 font-sans">
@@ -590,7 +590,7 @@ export default function CustomDressingPage() {
                       <select
                         value={form.budget}
                         onChange={(e) => set("budget", e.target.value)}
-                        className={`${inputClass} ${errors.budget ? "border-red-500" : ""}`}
+                        className={`${inputClass} ${errors.budget ? "border-red-500" : ""}`} style={{ fontSize: "16px" }}
                       >
                         <option value="">Select budget range</option>
                         {BUDGET_OPTIONS.map((opt) => (

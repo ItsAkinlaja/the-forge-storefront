@@ -55,6 +55,15 @@
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/* iOS zoom fix -- inputs must be at least 16px to prevent auto-zoom on iPhone */
+@media (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
 /* Custom Scrollbar for Luxury Aesthetic */
 ::-webkit-scrollbar {
   width: 6px;
