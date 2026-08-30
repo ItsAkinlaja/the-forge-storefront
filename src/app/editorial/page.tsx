@@ -51,7 +51,7 @@ export default function EditorialPage() {
               <p className="text-[10px] uppercase tracking-[0.45em] text-[#C6A15B] font-semibold">Editorial Campaigns and Lookbooks</p>
               <h1 className="font-editorial text-5xl sm:text-6xl text-[#050505] dark:text-white font-light">The Forge Archive</h1>
               <p className="text-xs sm:text-sm text-[#666666] dark:text-[#8E8E93] font-light leading-relaxed">
-                Seasonal haute couture campaigns capturing the intersection of Nigerian regal heritage, modern tailoring, and artisanal mastery.
+                Seasonal campaigns celebrating African originality, Lagos culture, and fashion that is made to be lived in.
               </p>
             </div>
           </Container>
@@ -89,7 +89,7 @@ export default function EditorialPage() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="space-y-2">
                 <p className="text-[10px] uppercase tracking-[0.4em] text-[#C6A15B] font-semibold">Ready to wear your story?</p>
-                <p className="font-editorial text-3xl text-[#050505] dark:text-white font-light">Begin your bespoke journey.</p>
+                <p className="font-editorial text-3xl text-[#050505] dark:text-white font-light">Start your Forge journey.</p>
               </div>
               <div className="flex gap-3 flex-shrink-0">
                 <Link href="/custom-dressing">

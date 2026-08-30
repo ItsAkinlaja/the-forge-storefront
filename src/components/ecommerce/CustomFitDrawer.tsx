@@ -72,7 +72,7 @@ export function CustomFitDrawer({ product, isOpen, onClose }: CustomFitDrawerPro
                 <Scissors className="w-5 h-5 text-[#B58A38] dark:text-[#C6A15B]" />
                 <div>
                   <h2 className="font-editorial text-xl text-[#050505] dark:text-white tracking-wider uppercase">
-                    Bespoke Handmade Fitting
+                    Custom Fitting
                   </h2>
                   <p className="text-[10px] text-[#B58A38] dark:text-[#C6A15B] uppercase tracking-[0.2em]">
                     {product.name}
@@ -146,13 +146,13 @@ export function CustomFitDrawer({ product, isOpen, onClose }: CustomFitDrawerPro
 
                   <Button variant="gold" size="lg" className="w-full py-4 flex items-center justify-center gap-2">
                     <Scissors className="w-4 h-4" />
-                    <span>Attach Bespoke Fit &amp; Add To Selection</span>
+                    <span>Attach Custom Fit &amp; Add To Bag</span>
                   </Button>
                 </form>
               ) : (
                 <div className="py-12 text-center space-y-6">
                   <CheckCircle className="w-16 h-16 text-[#B58A38] dark:text-[#C6A15B] mx-auto stroke-[1]" />
-                  <h3 className="font-editorial text-3xl text-[#050505] dark:text-white">Bespoke Fitting Attached</h3>
+                  <h3 className="font-editorial text-3xl text-[#050505] dark:text-white">Custom Fitting Attached</h3>
                   <p className="text-xs text-[#555555] dark:text-[#A0A0A0] max-w-sm mx-auto leading-relaxed">
                     Your custom measurements and fabric selection for <span className="text-[#050505] dark:text-white font-semibold">{product.name}</span> have been attached to your shopping bag selection.
                   </p>

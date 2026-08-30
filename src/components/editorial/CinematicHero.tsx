@@ -59,7 +59,7 @@ export function CinematicHero() {
           </h1>
 
           <p className="text-sm text-white/85 max-w-sm font-sans font-light leading-relaxed drop-shadow-sm">
-            Hand-crafted bespoke suits, royal silk Jalamias, couture bridal gowns, and velvet evening pieces by master artisans.
+            Premium shirts, street looks, jalabias, dinner dresses and more — made for the Nigerian who dresses with purpose.
           </p>
 
           <div className="flex flex-wrap gap-3 pt-1">

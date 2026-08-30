@@ -67,7 +67,7 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#050505] dark:text-white font-semibold">Information</h4>
             <ul className="space-y-2.5 text-xs">
-              <li><Link href="/custom-dressing" className="hover:text-[#C6A15B] transition-colors">Book Bespoke Fitting</Link></li>
+              <li><Link href="/custom-dressing" className="hover:text-[#C6A15B] transition-colors">Book Custom Fitting</Link></li>
               <li><Link href="/editorial" className="hover:text-[#050505] dark:hover:text-white transition-colors">Lookbook</Link></li>
               <li><Link href="/account" className="hover:text-[#050505] dark:hover:text-white transition-colors">My Account</Link></li>
               <li><Link href="/cart" className="hover:text-[#050505] dark:hover:text-white transition-colors">Shopping Bag</Link></li>

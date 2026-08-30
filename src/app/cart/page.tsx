@@ -50,7 +50,7 @@ export default function CartPage() {
                   Your Bag is Empty
                 </h1>
                 <p className="text-xs text-[#666666] dark:text-[#888888] leading-relaxed font-sans">
-                  Browse handmade bespoke pieces from The Men Forge and The Lady Forge.
+                  Browse The Men Forge and The Lady Forge collections.
                 </p>
               </div>
               <div className="flex justify-center gap-3 pt-2">
@@ -151,7 +151,7 @@ export default function CartPage() {
                         {item.bespokeMeasurements && (
                           <div className="mt-2 text-[10px] text-[#C6A15B] bg-[#FAFAF8] dark:bg-[#1A1813] border border-[#C6A15B]/20 dark:border-[#C6A15B]/10 px-2.5 py-1.5 flex items-center gap-1.5 font-sans">
                             <Scissors className="w-3 h-3" />
-                            Bespoke fit data attached
+                            Custom fit data attached
                           </div>
                         )}
                       </div>

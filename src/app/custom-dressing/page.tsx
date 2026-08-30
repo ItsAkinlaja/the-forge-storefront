@@ -47,7 +47,7 @@ export default function CustomDressingPage() {
         <section className="relative h-[45vh] min-h-[360px] w-full flex items-end justify-start overflow-hidden border-b border-[#E5E5E5] dark:border-[#1C1C1C]">
           <Image
             src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1800&q=85"
-            alt="Bespoke Custom Tailoring Atelier"
+            alt="Custom Fitting at The Forge"
             fill
             priority
             className="object-cover object-top brightness-[0.3]"
@@ -74,7 +74,7 @@ export default function CustomDressingPage() {
               {/* Process */}
               <div className="lg:col-span-5 space-y-6">
                 <div className="space-y-2">
-                  <p className="text-[10px] uppercase tracking-[0.4em] text-[#C6A15B] font-semibold">The Bespoke Experience</p>
+                  <p className="text-[10px] uppercase tracking-[0.4em] text-[#C6A15B] font-semibold">The Custom Fitting Experience</p>
                   <h2 className="font-editorial text-3xl sm:text-4xl text-[#050505] dark:text-white font-light">Crafted Exclusively For Your Persona</h2>
                 </div>
                 <div className="space-y-3">
@@ -125,9 +125,9 @@ export default function CustomDressingPage() {
                         <label className="block text-[11px] uppercase tracking-wider text-[#888888] dark:text-[#555555] mb-2">Garment Type *</label>
                         <select value={formData.garmentType} onChange={e => setFormData({ ...formData, garmentType: e.target.value })} className={inputClass}>
                           <option value="jalamia-kaftans">Royal Jalamia and Kaftan</option>
-                          <option value="suits-blazers">Bespoke Suit or Tuxedo</option>
-                          <option value="wedding-dresses">Wedding Dress and Bridal</option>
-                          <option value="couture-gowns">Gala Evening Gown</option>
+                          <option value="suits-blazers">Custom Suit</option>
+                          <option value="wedding-dresses">Wedding Dress</option>
+                          <option value="couture-gowns">Evening Gown</option>
                           <option value="luxury-coats">Luxury Cashmere Overcoat</option>
                         </select>
                       </div>

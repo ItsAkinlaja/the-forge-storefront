@@ -20,7 +20,7 @@ const pillars = [
   },
   {
     icon: ShieldCheck,
-    title: "Bespoke Guarantee",
+    title: "Custom Fit Guarantee",
     desc: "Master tailor consultation until you achieve the perfect fit.",
   },
 ];
@@ -73,7 +73,7 @@ export function AtelierPhilosophy() {
                   Garments produced with dignity, cut by hand, and finished to regal standards. This is THE FORGE signature.
                 </p>
                 <div className="pt-6 border-t border-[#1C1C1C] space-y-1">
-                  <p className="text-xs tracking-[0.2em] text-[#C6A15B] uppercase font-semibold font-sans">Director of Haute Couture</p>
+                  <p className="text-xs tracking-[0.2em] text-[#C6A15B] uppercase font-semibold font-sans">Creative Director</p>
                   <p className="text-[10px] text-[#555555] uppercase tracking-wider font-sans">The Forge Atelier</p>
                 </div>
               </div>
@@ -120,7 +120,7 @@ export function AtelierPhilosophy() {
                 "Garments produced with dignity, cut by hand, and finished to regal standards. This is THE FORGE signature."
               </p>
               <p className="mt-4 text-[10px] tracking-[0.3em] text-[#C6A15B] uppercase font-semibold font-sans">
-                Director of Haute Couture, The Forge Atelier
+                Creative Director, The Forge Atelier
               </p>
             </div>
           </Container>
