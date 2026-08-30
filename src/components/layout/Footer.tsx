@@ -97,10 +97,18 @@ export function Footer() {
             &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> The Forge. All Rights Reserved.
             <span className="ml-2 text-[#C6A15B]/60">theforgebrand.shop</span>
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Link href="/privacy" className="hover:text-[#050505] dark:hover:text-[#8E8E93] transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-[#050505] dark:hover:text-[#8E8E93] transition-colors">Terms of Service</Link>
-            <Link href="/sitemap" className="hover:text-[#050505] dark:hover:text-[#8E8E93] transition-colors">Sitemap</Link>
+            <span className="w-px h-3 bg-[#E5E5E5] dark:bg-[#262626]" />
+            <a
+              href="https://www.akinlajatimileyin.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#888888] dark:text-[#444444] hover:text-[#C6A15B] dark:hover:text-[#C6A15B] transition-colors"
+            >
+              Designed and developed by Akinlaja
+            </a>
           </div>
         </div>
 
