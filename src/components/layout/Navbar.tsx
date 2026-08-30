@@ -119,7 +119,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
               </Link>
               {menOpen && (
                 <div className="absolute top-full right-0 w-56 bg-white dark:bg-[#0A0A0A] border border-[#EBEBEB] dark:border-[#1C1C1C] py-3 shadow-xl z-50">
-                  <p className="text-[9px] text-[#C6A15B] uppercase tracking-[0.25em] font-semibold px-4 pb-2 border-b border-[#EBEBEB] dark:border-[#1C1C1C]">Men's Collection</p>
+                  <p className="text-[9px] text-[#C6A15B] uppercase tracking-[0.25em] font-semibold px-4 pb-2 border-b border-[#EBEBEB] dark:border-[#1C1C1C]">Men&apos;s Collection</p>
                   <Link href="/the-men-forge/suits-blazers" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Suits and Tuxedos</Link>
                   <Link href="/the-men-forge/jalamia-kaftans" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Jalamias and Kaftans</Link>
                   <Link href="/the-men-forge/luxury-coats" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Luxury Coats</Link>
@@ -134,7 +134,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
               </Link>
               {ladyOpen && (
                 <div className="absolute top-full right-0 w-56 bg-white dark:bg-[#0A0A0A] border border-[#EBEBEB] dark:border-[#1C1C1C] py-3 shadow-xl z-50">
-                  <p className="text-[9px] text-[#C6A15B] uppercase tracking-[0.25em] font-semibold px-4 pb-2 border-b border-[#EBEBEB] dark:border-[#1C1C1C]">Women's Collection</p>
+                  <p className="text-[9px] text-[#C6A15B] uppercase tracking-[0.25em] font-semibold px-4 pb-2 border-b border-[#EBEBEB] dark:border-[#1C1C1C]">WoMen&apos;s Collection</p>
                   <Link href="/the-lady-forge/wedding-dresses" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Wedding and Bridal</Link>
                   <Link href="/the-lady-forge/couture-gowns" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Couture Gala Gowns</Link>
                   <Link href="/the-lady-forge/tailored-suits" className="block px-4 py-2.5 text-[11px] text-[#555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111] transition-all">Tailored Suits</Link>
@@ -311,7 +311,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
             {/* Standalone links */}
             {[
               { href: "/custom-dressing", label: "Custom Fitting", accent: true },
-              { href: "/editorial", label: "Lookbook", accent: false },
+              { href: "/editorial", label: "Forge Gallery", accent: false },
               { href: "/search", label: "Search", accent: false },
             ].map((item) => (
               <Link
