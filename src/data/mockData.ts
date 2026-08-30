@@ -1,12 +1,11 @@
 import { Product, Collection } from "@/types";
 
 // Naira exchange rate -- update as needed
-const NGN = (usd: number) => `N${(usd * 1600).toLocaleString()}`;
 const fmt  = (usd: number) => `N${(usd * 1600).toLocaleString()}`;
 
 export const MOCK_PRODUCTS: Product[] = [
 
-  // ── THE MEN FORGE ─────────────────────────────────────────────────────────
+  // â”€â”€ THE MEN FORGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: "men-1",
@@ -290,7 +289,7 @@ export const MOCK_PRODUCTS: Product[] = [
     inStock: true
   },
 
-  // ── THE LADY FORGE ─────────────────────────────────────────────────────────
+  // â”€â”€ THE LADY FORGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   {
     id: "lady-1",

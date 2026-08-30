@@ -41,12 +41,14 @@ function tfc_boot() {
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-auth.php';
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-cart.php';
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-users.php';
+    require_once TFC_PLUGIN_DIR . 'includes/class-tfc-checkout.php';
 
     TFC_CORS::init();
     TFC_Products::init();
     TFC_Auth::init();
     TFC_Cart::init();
     TFC_Users::init();
+    TFC_Checkout::init();
 }
 
 // Primary hook -- fires after WooCommerce fully loads

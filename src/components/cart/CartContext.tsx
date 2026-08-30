@@ -207,7 +207,7 @@ export function CartProvider({
     (total, item) => total + item.product.price * item.quantity,
     0
   );
-  const formattedSubtotal = `$${subtotal.toLocaleString()}`;
+  const formattedSubtotal = `₦${subtotal.toLocaleString("en-NG")}`;
 
   return (
     <CartContext.Provider

@@ -89,3 +89,28 @@ export interface CartItem {
   bespokeMeasurements?: BespokeMeasurementData;
   quantity: number;
 }
+
+export interface ShippingAddress {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+}
+
+export interface Order {
+  id: string;
+  orderNumber: string;
+  status: "pending" | "processing" | "completed" | "cancelled";
+  items: CartItem[];
+  shippingAddress: ShippingAddress;
+  subtotal: number;
+  shippingFee: number;
+  total: number;
+  formattedTotal: string;
+  paystackReference?: string;
+  createdAt: string;
+}
