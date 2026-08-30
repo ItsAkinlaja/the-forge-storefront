@@ -1,27 +1,49 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { ShoppingBag, Search, Menu, X, ChevronDown, Scissors } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { ShoppingBag, Search, Menu, X, ChevronDown, Scissors, User } from "lucide-react";
 import { useCart } from "@/components/cart/CartContext";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useTheme } from "@/components/theme/ThemeContext";
+import { useAuth } from "@/context/AuthContext";
 
 const LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-e1788079593872.jpg";
 const LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788079650893.jpeg";
 
 export function Navbar() {
-  const [scrolled, setScrolled]           = useState(false);
+  const [scrolled, setScrolled]             = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [menOpen, setMenOpen]             = useState(false);
-  const [ladyOpen, setLadyOpen]           = useState(false);
+  const [menOpen, setMenOpen]               = useState(false);
+  const [ladyOpen, setLadyOpen]             = useState(false);
+  const [accountOpen, setAccountOpen]       = useState(false);
+  const accountRef                          = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
+  const router = useRouter();
   const { openCart, cartCount } = useCart();
   const { theme } = useTheme();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  // Close account dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (accountRef.current && !accountRef.current.contains(e.target as Node)) {
+        setAccountOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  async function handleSignOut() {
+    setAccountOpen(false);
+    await logout();
+    router.push("/");
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -137,6 +159,40 @@ export function Navbar() {
               <Search className="w-4 h-4 stroke-[1.5]" />
             </Link>
 
+            {/* Account icon */}
+            {isAuthenticated && user ? (
+              <div className="relative" ref={accountRef}>
+                <button
+                  onClick={() => setAccountOpen((v) => !v)}
+                  className="flex items-center justify-center w-7 h-7 border border-[#C6A15B] text-[#C6A15B] text-[10px] font-bold font-sans tracking-wider hover:bg-[#C6A15B] hover:text-white transition-all"
+                  aria-label="Account menu"
+                >
+                  {user.firstName.charAt(0).toUpperCase()}
+                </button>
+                {accountOpen && (
+                  <div className="absolute top-full right-0 w-44 bg-white dark:bg-[#0A0A0A] border border-[#EBEBEB] dark:border-[#1C1C1C] py-2 shadow-xl z-50 mt-1">
+                    <Link
+                      href="/account"
+                      onClick={() => setAccountOpen(false)}
+                      className="block px-4 py-2.5 text-[11px] text-[#555555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111111] transition-all tracking-[0.1em] uppercase font-sans"
+                    >
+                      My Account
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="w-full text-left px-4 py-2.5 text-[11px] text-[#555555] dark:text-[#A0A0A0] hover:text-[#050505] dark:hover:text-white hover:bg-[#FAFAFA] dark:hover:bg-[#111111] transition-all tracking-[0.1em] uppercase font-sans"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link href="/login" className="text-[#050505] dark:text-[#D0D0D0] hover:text-[#C6A15B] transition-colors" aria-label="Sign in">
+                <User className="w-4 h-4 stroke-[1.5]" />
+              </Link>
+            )}
+
             <button onClick={openCart} className="text-[#050505] dark:text-[#D0D0D0] hover:text-[#C6A15B] transition-colors relative" aria-label="Bag">
               <ShoppingBag className="w-4 h-4 stroke-[1.5]" />
               {cartCount > 0 && (
@@ -194,6 +250,19 @@ export function Navbar() {
               </Link>
               <Link href="/editorial" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">Lookbook</Link>
               <Link href="/search" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">Search</Link>
+              {isAuthenticated ? (
+                <>
+                  <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">My Account</Link>
+                  <button
+                    onClick={async () => { setMobileMenuOpen(false); await handleSignOut(); }}
+                    className="block w-full text-left text-[#888888] dark:text-[#555555] uppercase tracking-[0.2em] text-xs font-sans"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block text-[#050505] dark:text-[#D0D0D0]">Sign In</Link>
+              )}
             </div>
           </div>
           <div className="p-6 border-t border-[#EBEBEB] dark:border-[#181818] flex justify-start">
