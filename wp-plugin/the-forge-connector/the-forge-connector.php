@@ -42,6 +42,7 @@ function tfc_boot() {
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-cart.php';
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-users.php';
     require_once TFC_PLUGIN_DIR . 'includes/class-tfc-checkout.php';
+    require_once TFC_PLUGIN_DIR . 'includes/class-tfc-custom-requests.php';
 
     TFC_CORS::init();
     TFC_Products::init();
@@ -49,6 +50,7 @@ function tfc_boot() {
     TFC_Cart::init();
     TFC_Users::init();
     TFC_Checkout::init();
+    TFC_Custom_Requests::init();
 }
 
 // Primary hook -- fires after WooCommerce fully loads
