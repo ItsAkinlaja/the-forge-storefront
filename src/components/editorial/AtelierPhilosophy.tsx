@@ -20,8 +20,8 @@ const pillars = [
   },
   {
     icon: Heart,
-    title: "Lagos at the Core",
-    desc: "Born in Lagos. Inspired by African originality. Every collection carries that energy.",
+    title: "Rooted in Culture",
+    desc: "Inspired by African roots, street culture, and the way we carry ourselves. Every piece reflects where we come from.",
   },
 ];
 
@@ -118,7 +118,7 @@ export function AtelierPhilosophy() {
                 &ldquo;Dare it, Wear it. That is not just a tagline -- it is how we build every single piece that leaves The Forge.&rdquo;
               </p>
               <p className="mt-4 text-[10px] tracking-[0.3em] text-[#C6A15B] uppercase font-semibold font-sans">
-                Creative Director, The Forge Lagos
+                Creative Director, The Forge
               </p>
             </div>
           </Container>

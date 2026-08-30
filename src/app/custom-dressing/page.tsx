@@ -30,6 +30,7 @@ interface FormState {
   occasion: string;
   preferredColours: string;
   budget: string;
+  otherGarmentType: string;
   sampleImages: File[];
 }
 
@@ -133,6 +134,7 @@ export default function CustomDressingPage() {
     occasion: "",
     preferredColours: "",
     budget: "",
+    otherGarmentType: "",
     sampleImages: [],
   });
 
@@ -158,7 +160,7 @@ export default function CustomDressingPage() {
   }
 
   function setGender(g: "men" | "women") {
-    setForm((prev) => ({ ...prev, gender: g, garmentType: "" }));
+    setForm((prev) => ({ ...prev, gender: g, garmentType: "", otherGarmentType: "" }));
     setErrors((prev) => {
       const next = { ...prev };
       delete next.gender;
@@ -245,7 +247,7 @@ export default function CustomDressingPage() {
       data.append("email", form.email.trim());
       data.append("phone", form.phone.trim());
       data.append("gender", form.gender);
-      data.append("garmentType", form.garmentType);
+      data.append("garmentType", form.garmentType === "Other" && form.otherGarmentType.trim() ? form.otherGarmentType.trim() : form.garmentType);
       data.append("description", form.description.trim());
       data.append("occasion", form.occasion.trim());
       data.append("preferredColours", form.preferredColours.trim());
@@ -289,6 +291,7 @@ export default function CustomDressingPage() {
       occasion: "",
       preferredColours: "",
       budget: "",
+      otherGarmentType: "",
       sampleImages: [],
     });
     setErrors({});
@@ -516,6 +519,22 @@ export default function CustomDressingPage() {
                         <p className="text-[11px] text-red-500 mt-1 font-sans">
                           {errors.garmentType}
                         </p>
+                      )}
+                      {/* Show free-text input when Other is selected */}
+                      {form.garmentType === "Other" && (
+                        <div className="mt-3">
+                          <label className={labelClass}>
+                            Describe the garment <span className="text-[#C6A15B]">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            autoFocus
+                            placeholder="e.g. Agbada, Shorts, Hoodie, Skirt..."
+                            value={form.otherGarmentType ?? ""}
+                            onChange={(e) => set("otherGarmentType" as keyof FormState, e.target.value)}
+                            className={inputClass}
+                          />
+                        </div>
                       )}
                     </div>
 

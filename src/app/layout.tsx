@@ -16,7 +16,7 @@ const sansFont = Plus_Jakarta_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const LOGO_URL = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-e1788097102902.jpeg";
+const LOGO_URL = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-2.jpeg";
 const SITE_URL = "https://www.theforgebrand.shop";
 
 export const metadata: Metadata = {
