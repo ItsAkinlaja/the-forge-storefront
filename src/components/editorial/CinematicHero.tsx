@@ -49,7 +49,7 @@ export function CinematicHero() {
         <div className="max-w-xl space-y-5">
 
           <p className="text-[9px] uppercase tracking-[0.5em] text-[#C6A15B] font-sans font-semibold drop-shadow-sm">
-            Haute Couture and Handmade Custom Tailoring
+            Dare it, Wear it!
           </p>
 
           <h1 className="font-editorial text-[2.8rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-light leading-[0.93] tracking-tight text-white drop-shadow-md">
