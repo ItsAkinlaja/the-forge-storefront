@@ -10,20 +10,22 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
 const GALLERY = [
-  { id: 1,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4940.jpg",            alt: "The Forge Look",     category: "The Men Forge",   span: "row-span-2" },
+  // The Lady Forge
+  { id: 1,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4940.jpg",            alt: "The Forge Look",     category: "The Lady Forge",  span: "row-span-2" },
   { id: 2,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4747.JPG.jpeg",       alt: "The Forge Style",    category: "The Lady Forge",  span: "" },
   { id: 3,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4751.JPG.jpeg",       alt: "The Forge Drip",     category: "The Lady Forge",  span: "" },
-  { id: 4,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4936-scaled.jpg",     alt: "Forge Editorial",    category: "The Men Forge",   span: "row-span-2" },
-  { id: 5,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4943-scaled.jpg",     alt: "Forge Campaign",     category: "The Men Forge",   span: "" },
-  { id: 6,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_6389.JPG-scaled.jpeg",alt: "Forge Culture",      category: "The Lady Forge",  span: "" },
-  { id: 7,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4935-scaled.jpg",     alt: "Forge Identity",     category: "The Men Forge",   span: "" },
-  { id: 8,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4938-scaled.jpg",     alt: "Forge Movement",     category: "The Men Forge",   span: "row-span-2" },
-  { id: 9,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7466.JPG-scaled.jpeg",alt: "Forge Lagos",        category: "The Lady Forge",  span: "" },
-  { id: 10, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7441.JPG-scaled.jpeg",alt: "Forge Looks",        category: "The Lady Forge",  span: "" },
+  { id: 4,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4936-scaled.jpg",     alt: "Forge Editorial",    category: "The Lady Forge",  span: "row-span-2" },
+  { id: 5,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4943-scaled.jpg",     alt: "Forge Campaign",     category: "The Lady Forge",  span: "" },
+  { id: 6,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4935-scaled.jpg",     alt: "Forge Identity",     category: "The Lady Forge",  span: "" },
+  { id: 7,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4938-scaled.jpg",     alt: "Forge Movement",     category: "The Lady Forge",  span: "row-span-2" },
+  // The Men Forge
+  { id: 8,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_6389.JPG-scaled.jpeg",alt: "Forge Culture",      category: "The Men Forge",   span: "" },
+  { id: 9,  src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7466.JPG-scaled.jpeg",alt: "Forge Lagos",        category: "The Men Forge",   span: "row-span-2" },
+  { id: 10, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7441.JPG-scaled.jpeg",alt: "Forge Looks",        category: "The Men Forge",   span: "" },
   { id: 11, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7447.JPG-scaled.jpeg",alt: "Forge Vibes",        category: "The Men Forge",   span: "" },
-  { id: 12, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7429.JPG-scaled.jpeg",alt: "Forge Collection",   category: "The Lady Forge",  span: "row-span-2" },
+  { id: 12, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7429.JPG-scaled.jpeg",alt: "Forge Collection",   category: "The Men Forge",   span: "row-span-2" },
   { id: 13, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7478.JPG-scaled.jpeg",alt: "Forge Statement",    category: "The Men Forge",   span: "" },
-  { id: 14, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7443.JPG-scaled.jpeg",alt: "Forge Authenticity", category: "The Lady Forge",  span: "" },
+  { id: 14, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7443.JPG-scaled.jpeg",alt: "Forge Authenticity", category: "The Men Forge",   span: "" },
   { id: 15, src: "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_7425.JPG-scaled.jpeg",alt: "Forge Original",     category: "The Men Forge",   span: "" },
 ];
 
