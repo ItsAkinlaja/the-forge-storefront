@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* Wire dark: utilities to the .dark class (Tailwind v4) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --surface: 255 255 255;
+    --surface-hover: 245 245 245;
+    --foreground: 5 5 5;
+    --muted: 100 100 105;
+    --gold: 198 161 91;
+    --gold-hover: 181 144 75;
+    --border: 229 229 229;
+  }
+
+  html.light {
+    --background: 255 255 255;
+    --surface: 255 255 255;
+    --surface-hover: 245 245 245;
+    --foreground: 5 5 5;
+    --muted: 100 100 105;
+    --gold: 198 161 91;
+    --gold-hover: 181 144 75;
+    --border: 229 229 229;
+  }
+
+  html.dark {
+    --background: 5 5 5;
+    --surface: 18 18 18;
+    --surface-hover: 28 28 28;
+    --foreground: 255 255 255;
+    --muted: 142 142 147;
+    --gold: 198 161 91;
+    --gold-hover: 181 144 75;
+    --border: 38 38 38;
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    font-family: var(--font-sans), sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Typography Token Classes */
+.font-editorial {
+  font-family: var(--font-editorial), Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Custom Scrollbar for Luxury Aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A15B;
+}
+
+/* Text Shimmer Effect for Gold Headlines */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #B58A38 0%, #C6A15B 50%, #E8CE96 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.dark .gold-gradient-text {
+  background: linear-gradient(135deg, #FFF 0%, #C6A15B 50%, #E8CE96 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  border-color: rgba(198, 161, 91, 0.4);
+  box-shadow: 0 0 15px rgba(198, 161, 91, 0.15);
+}
+
+/* Subtle Editorial Image Mask Animation */
+.image-reveal-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.image-reveal-container img {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease;
+}
+
+.image-reveal-container:hover img {
+  transform: scale(1.04);
+}
