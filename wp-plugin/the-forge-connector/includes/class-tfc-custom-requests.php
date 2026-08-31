@@ -177,9 +177,13 @@ class TFC_Custom_Requests {
                     );
                 }
 
-                // Verify MIME via file content, not just extension.
-                $finfo = new finfo( FILEINFO_MIME_TYPE );
-                $mime  = $finfo->file( $file['tmp_name'] );
+                // Verify MIME type safely with or without finfo extension
+                if ( function_exists( 'finfo_open' ) ) {
+                    $finfo = new finfo( FILEINFO_MIME_TYPE );
+                    $mime  = $finfo->file( $file['tmp_name'] );
+                } else {
+                    $mime = $file['type'];
+                }
 
                 if ( ! in_array( $mime, $allowed_mime_types, true ) ) {
                     remove_all_filters( 'upload_dir' );
@@ -190,8 +194,16 @@ class TFC_Custom_Requests {
                     );
                 }
 
-                $overrides = [ 'test_form' => false, 'mimes' => array_combine( $allowed_mime_types, $allowed_mime_types ) ];
-                $moved     = wp_handle_upload( $file, $overrides );
+                // Correct mimes array format for wp_handle_upload: ext => mime
+                $overrides = [
+                    'test_form' => false,
+                    'mimes'     => [
+                        'jpg|jpeg|jpe' => 'image/jpeg',
+                        'png'          => 'image/png',
+                        'webp'         => 'image/webp',
+                    ],
+                ];
+                $moved = wp_handle_upload( $file, $overrides );
 
                 if ( isset( $moved['error'] ) ) {
                     remove_all_filters( 'upload_dir' );

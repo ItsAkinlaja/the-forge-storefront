@@ -41,7 +41,7 @@ class TFC_CORS {
 
         header( 'Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS' );
         header( 'Access-Control-Allow-Credentials: true' );
-        header( 'Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce, X-Requested-With' );
+        header( 'Access-Control-Allow-Headers: Authorization, Content-Type, X-WP-Nonce, X-Requested-With, X-Guest-Cart' );
         header( 'Access-Control-Max-Age: 86400' );
         header( 'Vary: Origin' );
     }

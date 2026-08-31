@@ -2,11 +2,33 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useTheme } from "@/components/theme/ThemeContext";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 const WP_BASE = "https://central.theforgebrand.shop";
+
+const FOOTER_LOGO_LIGHT = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-1-e1788157143811.jpeg";
+const FOOTER_LOGO_DARK  = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4179-1-e1788157194913.jpg";
+
+function FooterLogo() {
+  const { theme } = useTheme();
+  const src = theme === "dark" ? FOOTER_LOGO_DARK : FOOTER_LOGO_LIGHT;
+  return (
+    <div className="relative h-14 w-44">
+      <Image
+        key={src}
+        src={src}
+        alt="THE FORGE"
+        fill
+        className="object-contain object-left transition-opacity duration-300"
+        sizes="176px"
+      />
+    </div>
+  );
+}
 
 function NewsletterForm() {
   const [email, setEmail]     = useState("");
@@ -71,9 +93,9 @@ export function Footer() {
 
           {/* Brand block */}
           <div className="lg:col-span-2 space-y-5">
-            <h3 className="font-editorial text-2xl text-[#050505] dark:text-white tracking-[0.2em] font-light">THE FORGE</h3>
+            <FooterLogo />
             <p className="text-xs leading-relaxed max-w-sm text-[#555555] dark:text-[#A0A0A0]">
-              A Nigerian fashion brand crafting premium menswear and womenswear from Lagos. From street to boardroom, Jalabias to dinner gowns -- built for the Nigerian who dresses with intention.
+              Rooted in African culture. Built for everyone who dresses with purpose. From everyday street looks to dinner gowns, Jalabias to blazers -- The Forge is for the bold, wherever you are in the world.
             </p>
             <div className="space-y-2 text-xs text-[#666666] dark:text-[#8E8E93]">
               <div className="flex items-start gap-2">

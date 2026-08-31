@@ -325,8 +325,6 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
             {/* Standalone links */}
             {[
-              { href: "/size-guide",     label: "Size Chart",     accent: false },
-              { href: "/size-estimator", label: "Size Calculator", accent: false },
               { href: "/custom-dressing", label: "Book a Fitting", accent: true },
               { href: "/editorial", label: "Forge Gallery", accent: false },
               { href: "/search", label: "Search", accent: false },
@@ -341,6 +339,35 @@ export function Navbar({ overlay = false }: NavbarProps) {
                 <ArrowUpRight className="w-3.5 h-3.5 opacity-40" />
               </Link>
             ))}
+
+            {/* Style Tools accordion -- last item, mirrors desktop */}
+            <div>
+              <button
+                onClick={() => setStyleToolsOpen((v) => !v)}
+                className="w-full flex items-center justify-between py-3.5 border-b border-[#F0F0F0] dark:border-[#141414]"
+              >
+                <span className="font-editorial text-xl text-[#050505] dark:text-white font-light tracking-wide">Style Tools</span>
+                <ChevronRight className={`w-4 h-4 text-[#C6A15B] transition-transform duration-200 ${styleToolsOpen ? "rotate-90" : ""}`} />
+              </button>
+              {styleToolsOpen && (
+                <div className="py-2 pl-4 space-y-1">
+                  {[
+                    { href: "/size-guide",     label: "Size Chart" },
+                    { href: "/size-estimator", label: "Size Calculator" },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeDrawer}
+                      className="flex items-center justify-between py-2.5 text-[11px] uppercase tracking-[0.2em] text-[#555555] dark:text-[#888888] hover:text-[#C6A15B] transition-colors font-sans"
+                    >
+                      {item.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-40" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Account section */}
