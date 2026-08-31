@@ -1,32 +1,15 @@
 "use client";
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-} from "react";
-import {
-  AuthUser,
-  getMe,
-  login as authLogin,
-  register as authRegister,
-  logout as authLogout,
-} from "@/lib/auth/service";
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+import { AuthUser, getMe, login as authLogin, register as authRegister, logout as authLogout } from "@/lib/auth/service";
+import { getGuestToken, clearGuestToken } from "@/lib/cart/guestToken";
 
 interface AuthContextType {
   user: AuthUser | null;
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (
-    email: string,
-    password: string,
-    firstName: string,
-    lastName: string
-  ) => Promise<void>;
+  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
 }
@@ -40,13 +23,12 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children, onLogin, onLogout }: AuthProviderProps) {
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [user, setUser]         = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Track refs to callbacks so effects don't re-run when they change
-  const onLoginRef = useRef(onLogin);
+  const onLoginRef  = useRef(onLogin);
   const onLogoutRef = useRef(onLogout);
-  useEffect(() => { onLoginRef.current = onLogin; }, [onLogin]);
+  useEffect(() => { onLoginRef.current  = onLogin;  }, [onLogin]);
   useEffect(() => { onLogoutRef.current = onLogout; }, [onLogout]);
 
   const refreshUser = useCallback(async () => {
@@ -54,7 +36,6 @@ export function AuthProvider({ children, onLogin, onLogout }: AuthProviderProps)
     setUser(me);
   }, []);
 
-  // Restore session on mount
   useEffect(() => {
     let cancelled = false;
     async function init() {
@@ -74,24 +55,21 @@ export function AuthProvider({ children, onLogin, onLogout }: AuthProviderProps)
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {
-    const result = await authLogin(email, password);
+    // Grab guest token before login so we can merge the guest cart
+    const guestToken = getGuestToken();
+    const result = await authLogin(email, password, guestToken || undefined);
     setUser(result.user);
+    clearGuestToken();
     onLoginRef.current?.(result.user.id);
   }, []);
 
-  const register = useCallback(
-    async (
-      email: string,
-      password: string,
-      firstName: string,
-      lastName: string
-    ) => {
-      const result = await authRegister(email, password, firstName, lastName);
-      setUser(result.user);
-      onLoginRef.current?.(result.user.id);
-    },
-    []
-  );
+  const register = useCallback(async (email: string, password: string, firstName: string, lastName: string) => {
+    const guestToken = getGuestToken();
+    const result = await authRegister(email, password, firstName, lastName, guestToken || undefined);
+    setUser(result.user);
+    clearGuestToken();
+    onLoginRef.current?.(result.user.id);
+  }, []);
 
   const logout = useCallback(async () => {
     await authLogout();
@@ -102,9 +80,7 @@ export function AuthProvider({ children, onLogin, onLogout }: AuthProviderProps)
   const isAuthenticated = user !== null;
 
   return (
-    <AuthContext.Provider
-      value={{ user, isLoading, isAuthenticated, login, register, logout, refreshUser }}
-    >
+    <AuthContext.Provider value={{ user, isLoading, isAuthenticated, login, register, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );

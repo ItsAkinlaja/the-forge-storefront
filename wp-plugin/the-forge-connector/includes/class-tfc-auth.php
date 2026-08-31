@@ -50,6 +50,12 @@ class TFC_Auth {
             return new WP_Error( 'invalid_credentials', 'Incorrect email or password.', [ 'status' => 401 ] );
         }
 
+                // Merge guest cart if token provided
+        $guest_token = sanitize_text_field( $request->get_param( 'guestCartToken' ) ?? '' );
+        if ( $guest_token ) {
+            TFC_Cart::merge_guest_into_user( $guest_token, $user->ID );
+        }
+
         return rest_ensure_response( [
             'token' => self::generate_token( $user ),
             'user'  => self::format_user( $user ),
@@ -90,6 +96,13 @@ class TFC_Auth {
         }
 
         $user = get_user_by( 'ID', $user_id );
+
+        // Merge guest cart if token provided
+        $guest_token = sanitize_text_field( $request->get_param( 'guestCartToken' ) ?? '' );
+        if ( $guest_token ) {
+            TFC_Cart::merge_guest_into_user( $guest_token, $user->ID );
+        }
+
         return new WP_REST_Response( [
             'token' => self::generate_token( $user ),
             'user'  => self::format_user( $user ),

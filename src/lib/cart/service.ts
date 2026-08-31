@@ -1,7 +1,8 @@
 import { getToken } from "@/lib/auth/service";
+import { getGuestToken } from "@/lib/cart/guestToken";
 import { Product, BespokeMeasurementData } from "@/types";
 
-const API = process.env.NEXT_PUBLIC_WP_API_URL || "https://central.theforgebrand.shop/wp-json";
+const API  = process.env.NEXT_PUBLIC_WP_API_URL || "https://central.theforgebrand.shop/wp-json";
 const BASE = `${API}/forge/v1/cart`;
 
 export interface ServerCartItem {
@@ -19,16 +20,20 @@ export interface ServerCart {
   count: number;
   subtotal: number;
   formattedSubtotal: string;
+  guestToken?: string;
 }
 
-function authHeader(): Record<string, string> {
+/** Build correct headers for auth user OR guest */
+function cartHeaders(): Record<string, string> {
   const token = getToken();
-  if (!token) throw new Error("Not authenticated");
-  return { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" };
+  if (token) {
+    return { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" };
+  }
+  return { "X-Guest-Cart": getGuestToken(), "Content-Type": "application/json" };
 }
 
 export async function fetchCart(): Promise<ServerCart> {
-  const res = await fetch(BASE, { headers: authHeader(), cache: "no-store" });
+  const res = await fetch(BASE, { headers: cartHeaders(), cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch cart");
   return res.json();
 }
@@ -41,7 +46,7 @@ export async function addToServerCart(
 ): Promise<ServerCart> {
   const res = await fetch(BASE, {
     method: "POST",
-    headers: authHeader(),
+    headers: cartHeaders(),
     body: JSON.stringify({ productId: Number(productId), quantity, selectedSize, bespokeMeasurements }),
     cache: "no-store",
   });
@@ -52,7 +57,7 @@ export async function addToServerCart(
 export async function updateServerCartItem(itemId: string, quantity: number): Promise<ServerCart> {
   const res = await fetch(`${BASE}/${itemId}`, {
     method: "PUT",
-    headers: authHeader(),
+    headers: cartHeaders(),
     body: JSON.stringify({ quantity }),
     cache: "no-store",
   });
@@ -63,7 +68,7 @@ export async function updateServerCartItem(itemId: string, quantity: number): Pr
 export async function removeServerCartItem(itemId: string): Promise<ServerCart> {
   const res = await fetch(`${BASE}/${itemId}`, {
     method: "DELETE",
-    headers: authHeader(),
+    headers: cartHeaders(),
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Failed to remove cart item");
@@ -73,7 +78,7 @@ export async function removeServerCartItem(itemId: string): Promise<ServerCart> 
 export async function clearServerCart(): Promise<ServerCart> {
   const res = await fetch(BASE, {
     method: "DELETE",
-    headers: authHeader(),
+    headers: cartHeaders(),
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Failed to clear cart");
