@@ -29,11 +29,11 @@ export const metadata: Metadata = {
   description:
     "Rooted in African culture. Built for everyone who dresses with purpose. From street looks to dinner gowns, Jalabias to blazers — The Forge is for the bold, wherever you are.",
 
-  /*
-   * Favicon is handled automatically by Next.js App Router.
-   * It detects src/app/icon.jpg and src/app/apple-icon.jpg.
-   * No manual icons config needed here.
-   */
+  icons: {
+    icon: "/icon.jpg",
+    shortcut: "/icon.jpg",
+    apple: "/apple-icon.jpg",
+  },
 
   openGraph: {
     title: "THE FORGE — Dare it, Wear it!",
@@ -76,6 +76,10 @@ export default function RootLayout({
       className={`${editorialFont.variable} ${sansFont.variable} h-full antialiased dark`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="icon" href="/icon.jpg" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/apple-icon.jpg" />
+      </head>
       <body
         className="min-h-full flex flex-col bg-[#050505] text-[#FFFFFF] font-sans selection:bg-[#C6A15B] selection:text-[#050505]"
         suppressHydrationWarning
