@@ -16,7 +16,7 @@ const sansFont = Plus_Jakarta_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const LOGO_URL = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-2.jpeg";
+const OG_IMAGE = "https://central.theforgebrand.shop/wp-content/uploads/2026/08/IMG_4180.JPG-2.jpeg";
 const SITE_URL = "https://www.theforgebrand.shop";
 
 export const metadata: Metadata = {
@@ -27,31 +27,25 @@ export const metadata: Metadata = {
     template: "%s | THE FORGE",
   },
   description:
-    "Premium Nigerian fashion brand. Menswear and womenswear crafted with intention — from Lagos to the world. Dare it, Wear it!",
+    "Rooted in African culture. Built for everyone who dresses with purpose. From street looks to dinner gowns, Jalabias to blazers — The Forge is for the bold, wherever you are.",
 
-  // Favicon
-  icons: {
-    icon: [
-      { url: LOGO_URL, type: "image/jpeg" },
-    ],
-    apple: [
-      { url: LOGO_URL, type: "image/jpeg" },
-    ],
-    shortcut: LOGO_URL,
-  },
+  /*
+   * Favicon is handled automatically by Next.js App Router.
+   * It detects src/app/icon.jpg and src/app/apple-icon.jpg.
+   * No manual icons config needed here.
+   */
 
-  // Open Graph — controls how the link looks on WhatsApp, Facebook, etc.
   openGraph: {
     title: "THE FORGE — Dare it, Wear it!",
     description:
-      "Premium Nigerian fashion. Vintage shirts, streetwear, jalabias, corporate dresses, dinner gowns and more. Dare it, Wear it!",
+      "Premium fashion for Men and Women. Vintage shirts, streetwear, jalabias, corporate dresses, dinner gowns and more.",
     url: SITE_URL,
     siteName: "THE FORGE",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: LOGO_URL,
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "THE FORGE — Dare it, Wear it!",
@@ -59,15 +53,13 @@ export const metadata: Metadata = {
     ],
   },
 
-  // Twitter / X card
   twitter: {
     card: "summary_large_image",
     title: "THE FORGE — Dare it, Wear it!",
-    description: "Premium Nigerian fashion for Men and Women. Dare it, Wear it!",
-    images: [LOGO_URL],
+    description: "Premium fashion for Men and Women. Dare it, Wear it!",
+    images: [OG_IMAGE],
   },
 
-  // Canonical
   alternates: {
     canonical: SITE_URL,
   },
